@@ -9,7 +9,7 @@ import SignIn from "./components/SignIn";
 export const homeURL = "/";
 export const signUpURL = "/signup";
 export const feedURL = "/feed";
-const signInURL = "/signin";
+export const signInURL = "/signin";
 
 function App() {
   return (

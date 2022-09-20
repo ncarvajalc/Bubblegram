@@ -14,6 +14,7 @@ import { Tooltip } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
+import { signInURL } from "../App";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -202,7 +203,18 @@ const NavBar = () => {
                 </Menu>
               </Box>
             </>
-          ) : null}
+          ) : (
+            <>
+              <Box
+                sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+              ></Box>
+              <Box sx={{ flexGrow: 0 }}>
+                <Button variant="filled" onClick={() => navigate(signInURL)}>
+                  Sign in
+                </Button>
+              </Box>
+            </>
+          )}
         </Toolbar>
       </Container>
     </AppBar>
