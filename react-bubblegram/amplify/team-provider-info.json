@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-bubblegram-dev-95441-authRole",
+      "UnauthRoleArn": "arn:aws:iam::463439488459:role/amplify-bubblegram-dev-95441-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::463439488459:role/amplify-bubblegram-dev-95441-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-bubblegram-dev-95441-deployment",
+      "UnauthRoleName": "amplify-bubblegram-dev-95441-unauthRole",
+      "StackName": "amplify-bubblegram-dev-95441",
+      "StackId": "arn:aws:cloudformation:us-east-1:463439488459:stack/amplify-bubblegram-dev-95441/294d4960-38f4-11ed-b763-0ecb1f753d3d",
+      "AmplifyAppId": "d1ete9fo85py3"
+    }
+  }
+}
