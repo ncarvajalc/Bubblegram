@@ -1,3 +1,7 @@
 export default function Feed() {
-  return <h1>Feed</h1>;
+  return (
+    <div>
+      <h1>Feed</h1>
+    </div>
+  );
 }

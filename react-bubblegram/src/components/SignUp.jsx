@@ -9,6 +9,7 @@ import { Button, Checkbox, FormControlLabel } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Auth } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
+import { feedURL } from "../App";
 
 export default function SignUp() {
   const [inputs, setInputs] = useState({
@@ -50,7 +51,8 @@ export default function SignUp() {
     try {
       const user = await Auth.signIn(username, password);
       console.log(user);
-      navigate("/feed");
+      navigate(feedURL);
+      window.location.reload();
     } catch (error) {
       console.log("error signing in", error);
     }
