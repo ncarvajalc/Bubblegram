@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import { Link } from 'react-router-dom'
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -197,7 +198,9 @@ export default function SignUp() {
             </Box>
           </Box>
         )}
+        <p>Already have an account? <Link to="/signin">Sign In</Link></p>
       </Box>
+      
     </Container>
   );
 }
