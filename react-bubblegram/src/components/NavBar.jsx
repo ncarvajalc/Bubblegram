@@ -14,7 +14,7 @@ import { Tooltip } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
-import { signInURL } from "../App";
+import { feedURL, signInURL } from "../App";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -34,6 +34,7 @@ const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [authenticated, setAuthenticated] = useState(false);
+  const [username, setUsername] = useState("");
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -56,7 +57,7 @@ const NavBar = () => {
       console.log("checking if authenticated");
       try {
         let status = await Auth.currentAuthenticatedUser();
-        console.log("status", status);
+        setUsername(status.attributes.nickname);
         return true;
       } catch {
         return false;
@@ -126,7 +127,7 @@ const NavBar = () => {
                     navigate("/feed");
                   }}
                 >
-                  <Typography textAlign="center">Menu item 1</Typography>
+                  <Typography textAlign="center">Feed</Typography>
                 </MenuItem>
               </Menu>
             </Box>
@@ -158,11 +159,11 @@ const NavBar = () => {
                 <Button
                   onClick={() => {
                     handleCloseNavMenu();
-                    navigate("/feed");
+                    navigate(feedURL);
                   }}
                   sx={{ my: 2, color: "inherit", display: "block", mx: 1 }}
                 >
-                  Menu item 1
+                  Feed
                 </Button>
               </Box>
               <Box sx={{ flexGrow: 0 }}>
@@ -173,7 +174,7 @@ const NavBar = () => {
                     sx={{ p: 0 }}
                   >
                     <AccountCircle />
-                    <Typography>Username</Typography>
+                    <Typography>{username}</Typography>
                   </IconButton>
                 </Tooltip>
                 <Menu

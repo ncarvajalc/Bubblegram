@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -10,7 +10,7 @@ import { Button, Checkbox, FormControlLabel } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Auth } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
-import { feedURL } from "../App";
+import { feedURL, signInURL } from "../App";
 
 export default function SignUp() {
   const [inputs, setInputs] = useState({
@@ -18,12 +18,11 @@ export default function SignUp() {
     username: "",
     password: "",
   });
+  const [error, setError] = useState(null);
 
   const [confirmationMode, setConfirmationMode] = useState(false);
   const [seePassword, setSeePassword] = useState(false);
   const [confirmationCode, setConfirmationCode] = useState("");
-
-  // const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -44,7 +43,7 @@ export default function SignUp() {
       setConfirmationMode(true);
     } catch (error) {
       console.log("error signing up:", error);
-      // TODO show error.message in red
+      setError(error.message);
     }
   }
 
@@ -56,6 +55,7 @@ export default function SignUp() {
       window.location.reload();
     } catch (error) {
       console.log("error signing in", error);
+      setError(error.message);
     }
   }
 
@@ -65,6 +65,7 @@ export default function SignUp() {
       signIn(username, inputs.password);
     } catch (error) {
       console.log("error confirming sign up", error);
+      setError(error.message);
     }
   }
 
@@ -78,11 +79,12 @@ export default function SignUp() {
   }
 
   function handleChange(event) {
-    console.log(`Input ${event.target.name} changed`, event.target.value);
+    if (error) setError(null);
     setInputs({ ...inputs, [event.target.name]: event.target.value });
   }
 
   function handleCodeChange(event) {
+    if (error) setError(null);
     setConfirmationCode(event.target.value);
   }
 
@@ -105,6 +107,7 @@ export default function SignUp() {
         <Typography component="h2" variant="h5">
           Sign up
         </Typography>
+        {error ? <p style={{ color: "red" }}>{error}</p> : null}
         {!confirmationMode ? (
           <Box
             id="sign-up-form"
@@ -198,9 +201,10 @@ export default function SignUp() {
             </Box>
           </Box>
         )}
-        <p>Already have an account? <Link to="/signin">Sign In</Link></p>
+        <p>
+          Already have an account? <Link to={signInURL}>Sign In</Link>
+        </p>
       </Box>
-      
     </Container>
   );
 }

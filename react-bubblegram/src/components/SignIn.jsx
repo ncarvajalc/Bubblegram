@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -9,29 +9,30 @@ import Container from "@mui/material/Container";
 import { Button } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Auth } from "aws-amplify";
+import { feedURL, signUpURL } from "../App";
 
 function SignIn() {
-
   const navigate = useNavigate();
 
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(null);
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
   });
 
   function handleChange(e) {
-    if (error) setError(null)
+    if (error) setError(null);
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   }
 
   async function signIn(username, password) {
     try {
-      const user = await Auth.signIn(username, password);
-      setError(null)
-      navigate("/feed")
+      await Auth.signIn(username, password);
+      setError(null);
+      navigate(feedURL);
+      window.location.reload();
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
       setError(error.message);
     }
   }
@@ -55,44 +56,46 @@ function SignIn() {
         <Typography component="h2" variant="h5">
           Sign In
         </Typography>
-        {error ? <p style={{ color: 'red' }}>{error}</p> : null}
+        {error ? <p style={{ color: "red" }}>{error}</p> : null}
         <Box
-            component="form"
-            sx={{
-              "& .MuiTextField-root": { my: 1 },
-            }}
-            autoComplete="off"
-          >
-            <Box>
-              <TextField
-                required
-                name="username"
-                label="username"
-                onChange={handleChange}
-              />
-            </Box>
-            <Box>
-              <TextField
-                required
-                name="password"
-                label="password"
-                onChange={handleChange}
-              />
-            </Box>
-            <Box>
-              <Button
-                fullWidth
-                variant="contained"
-                onClick={() => signIn(inputs)}
-              >
-                Sign In
-              </Button>
-            </Box>
+          component="form"
+          sx={{
+            "& .MuiTextField-root": { my: 1 },
+          }}
+          autoComplete="off"
+        >
+          <Box>
+            <TextField
+              required
+              name="username"
+              label="email"
+              onChange={handleChange}
+            />
           </Box>
-          <p>New here? <Link to="/">Sign Up</Link></p>
+          <Box>
+            <TextField
+              required
+              name="password"
+              label="password"
+              onChange={handleChange}
+            />
+          </Box>
+          <Box>
+            <Button
+              fullWidth
+              variant="contained"
+              onClick={() => signIn(inputs)}
+            >
+              Sign In
+            </Button>
+          </Box>
+        </Box>
+        <p>
+          New here? <Link to={signUpURL}>Sign up</Link>
+        </p>
       </Box>
     </Container>
-  )
+  );
 }
 
-export default SignIn
+export default SignIn;
