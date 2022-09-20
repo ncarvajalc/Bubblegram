@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -11,6 +11,8 @@ import { TextField } from "@mui/material";
 import { Auth } from "aws-amplify";
 
 function SignIn() {
+
+  const navigate = useNavigate();
 
   const [inputs, setInputs] = useState({
     username: "",
@@ -24,8 +26,7 @@ function SignIn() {
   async function signIn(username, password) {
     try {
       const user = await Auth.signIn(username, password);
-      console.log(user);
-      console.log("signed in view...");
+      navigate("/feed")
     } catch (error) {
       console.log("error signing in", error);
     }
