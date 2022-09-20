@@ -32,7 +32,7 @@ function SignIn() {
       navigate(feedURL);
       window.location.reload();
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
       setError(error.message);
     }
   }

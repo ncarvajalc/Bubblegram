@@ -20,14 +20,13 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   async function handleSignOut() {
-    console.log("Sign out");
     try {
       await Auth.signOut();
       setAuthenticated(false);
       navigate("/");
       window.location.reload();
     } catch (error) {
-      console.log("error signing out: ", error);
+      console.error("error signing out: ", error);
     }
   }
 
@@ -54,7 +53,6 @@ const NavBar = () => {
 
   useEffect(() => {
     async function isAuthenticated() {
-      console.log("checking if authenticated");
       try {
         let status = await Auth.currentAuthenticatedUser();
         setUsername(status.attributes.nickname);
