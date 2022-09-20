@@ -8,9 +8,11 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Button, Checkbox, FormControlLabel } from "@mui/material";
 import { TextField } from "@mui/material";
-import { Auth } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
 import { feedURL, signInURL } from "../App";
+import { Auth } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
+import { createUser } from "../graphql/mutations";
 
 export default function SignUp() {
   const [inputs, setInputs] = useState({
@@ -32,6 +34,8 @@ export default function SignUp() {
       const user_password = inputs.password;
       const user_username = inputs.username;
 
+      const GQLUser = { email: user_email, username: user_username };
+
       await Auth.signUp({
         username: user_email,
         password: user_password,
@@ -39,22 +43,21 @@ export default function SignUp() {
           nickname: user_username,
         },
       });
-      console.log("Sign up successful");
+      await API.graphql(graphqlOperation(createUser, { input: GQLUser }));
       setConfirmationMode(true);
     } catch (error) {
-      console.log("error signing up:", error);
+      console.error("error signing up:", error);
       setError(error.message);
     }
   }
 
   async function signIn(username, password) {
     try {
-      const user = await Auth.signIn(username, password);
-      console.log(user);
+      await Auth.signIn(username, password);
       navigate(feedURL);
       window.location.reload();
     } catch (error) {
-      console.log("error signing in", error);
+      console.error("error signing in", error);
       setError(error.message);
     }
   }
@@ -64,7 +67,7 @@ export default function SignUp() {
       await Auth.confirmSignUp(username, code);
       signIn(username, inputs.password);
     } catch (error) {
-      console.log("error confirming sign up", error);
+      console.erro("error confirming sign up", error);
       setError(error.message);
     }
   }
@@ -72,9 +75,8 @@ export default function SignUp() {
   async function resendConfirmationCode(username) {
     try {
       await Auth.resendSignUp(username);
-      console.log("code resent successfully");
     } catch (err) {
-      console.log("error resending code: ", err);
+      console.error("error resending code: ", err);
     }
   }
 
