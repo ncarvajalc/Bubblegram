@@ -14,21 +14,25 @@ function SignIn() {
 
   const navigate = useNavigate();
 
+  const [error, setError] = useState(null)
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
   });
 
   function handleChange(e) {
+    if (error) setError(null)
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   }
 
   async function signIn(username, password) {
     try {
       const user = await Auth.signIn(username, password);
+      setError(null)
       navigate("/feed")
     } catch (error) {
-      console.log("error signing in", error);
+      console.log(error.message)
+      setError(error.message);
     }
   }
 
@@ -51,6 +55,7 @@ function SignIn() {
         <Typography component="h2" variant="h5">
           Sign In
         </Typography>
+        {error ? <p style={{ color: 'red' }}>{error}</p> : null}
         <Box
             component="form"
             sx={{
