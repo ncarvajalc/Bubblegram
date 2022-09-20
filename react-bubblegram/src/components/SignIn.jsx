@@ -68,7 +68,7 @@ function SignIn() {
             <TextField
               required
               name="username"
-              label="email"
+              label="username"
               onChange={handleChange}
             />
           </Box>
