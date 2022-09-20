@@ -9,21 +9,6 @@ import { Button } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Auth } from "aws-amplify";
 
-async function signUp(inputs) {
-  try {
-    const { user } = await Auth.signUp({
-      username: inputs.email,
-      password: inputs.password,
-      attributes: {
-        nickname: inputs.username,
-      },
-    });
-    console.log(user);
-  } catch (error) {
-    console.log("error signing up:", error);
-  }
-}
-
 export default function SignUp() {
   const [inputs, setInputs] = useState({
     email: "",
@@ -31,30 +16,89 @@ export default function SignUp() {
     password: "",
   });
 
+  const [confirmationMode, setConfirmationMode] = useState(false);
+  const [confirmationCode, setConfirmationCode] = useState("");
+
+  // const [error, setError] = useState("");
+
+  async function signUp(inputs) {
+    try {
+      const user_email = inputs.email;
+      const user_password = inputs.password;
+      const user_username = inputs.username;
+
+      await Auth.signUp({
+        username: user_email,
+        password: user_password,
+        attributes: {
+          nickname: user_username,
+        },
+      });
+      console.log("Sign up successful");
+      setConfirmationMode(true);
+    } catch (error) {
+      console.log("error signing up:", error);
+      // TODO show error.message in red
+    }
+  }
+
+  async function signIn(username, password) {
+    try {
+      const user = await Auth.signIn(username, password);
+      console.log(user);
+      console.log("signed in view...");
+    } catch (error) {
+      console.log("error signing in", error);
+    }
+  }
+
+  async function confirmSignUp(username, code) {
+    try {
+      await Auth.confirmSignUp(username, code);
+      signIn(username, inputs.password);
+    } catch (error) {
+      console.log("error confirming sign up", error);
+    }
+  }
+
+  async function resendConfirmationCode(username) {
+    try {
+      await Auth.resendSignUp(username);
+      console.log("code resent successfully");
+    } catch (err) {
+      console.log("error resending code: ", err);
+    }
+  }
+
   function handleChange(event) {
     console.log(`Input ${event.target.name} changed`, event.target.value);
     setInputs({ ...inputs, [event.target.name]: event.target.value });
   }
+
+  function handleCodeChange(event) {
+    setConfirmationCode(event.target.value);
+  }
+
   return (
-    <div>
-      <Container maxWidth="xs">
-        <Box
-          sx={{
-            marginTop: 3,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Typography component="h1" variant="h4">
-            Bubblegram
-          </Typography>
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h2" variant="h5">
-            Sign up
-          </Typography>
+    <Container maxWidth="xs">
+      <Box
+        sx={{
+          marginTop: 3,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Typography component="h1" variant="h4">
+          Bubblegram
+        </Typography>
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h2" variant="h5">
+          Sign up
+        </Typography>
+        {!confirmationMode ? (
           <Box
             component="form"
             sx={{
@@ -96,8 +140,28 @@ export default function SignUp() {
               </Button>
             </Box>
           </Box>
-        </Box>
-      </Container>
-    </div>
+        ) : (
+          <Box>
+            <Box>
+              <TextField
+                required
+                name="code"
+                label="Confirmation code"
+                onChange={handleCodeChange}
+              />
+            </Box>
+            <Box>
+              <Button
+                fullWidth
+                variant="contained"
+                onClick={() => confirmSignUp(inputs.email, confirmationCode)}
+              >
+                Confirm account
+              </Button>
+            </Box>
+          </Box>
+        )}
+      </Box>
+    </Container>
   );
 }
