@@ -5,9 +5,10 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { Button } from "@mui/material";
+import { Button, Checkbox, FormControlLabel } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Auth } from "aws-amplify";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [inputs, setInputs] = useState({
@@ -17,9 +18,12 @@ export default function SignUp() {
   });
 
   const [confirmationMode, setConfirmationMode] = useState(false);
+  const [seePassword, setSeePassword] = useState(false);
   const [confirmationCode, setConfirmationCode] = useState("");
 
   // const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   async function signUp(inputs) {
     try {
@@ -46,7 +50,7 @@ export default function SignUp() {
     try {
       const user = await Auth.signIn(username, password);
       console.log(user);
-      console.log("signed in view...");
+      navigate("/feed");
     } catch (error) {
       console.log("error signing in", error);
     }
@@ -100,6 +104,7 @@ export default function SignUp() {
         </Typography>
         {!confirmationMode ? (
           <Box
+            id="sign-up-form"
             component="form"
             sx={{
               "& .MuiTextField-root": { my: 1 },
@@ -111,6 +116,7 @@ export default function SignUp() {
                 required
                 name="email"
                 label="email"
+                autoComplete="off"
                 onChange={handleChange}
               />
             </Box>
@@ -119,6 +125,7 @@ export default function SignUp() {
                 required
                 name="username"
                 label="username"
+                autoComplete="off"
                 onChange={handleChange}
               />
             </Box>
@@ -128,6 +135,16 @@ export default function SignUp() {
                 name="password"
                 label="password"
                 onChange={handleChange}
+                autoComplete="off"
+                type={seePassword ? "text" : "password"}
+              />
+            </Box>
+            <Box>
+              <FormControlLabel
+                control={
+                  <Checkbox onChange={() => setSeePassword(!seePassword)} />
+                }
+                label="See password"
               />
             </Box>
             <Box>
@@ -141,11 +158,19 @@ export default function SignUp() {
             </Box>
           </Box>
         ) : (
-          <Box>
+          <Box
+            id="confirmation"
+            sx={{
+              "& .MuiTextField-root": { my: 1 },
+            }}
+            autoComplete="off"
+          >
             <Box>
               <TextField
+                id="confirmation-code"
                 required
                 name="code"
+                autoComplete="off"
                 label="Confirmation code"
                 onChange={handleCodeChange}
               />
@@ -157,6 +182,15 @@ export default function SignUp() {
                 onClick={() => confirmSignUp(inputs.email, confirmationCode)}
               >
                 Confirm account
+              </Button>
+            </Box>
+            <Box sx={{ my: 1 }}>
+              <Button
+                fullWidth
+                variant="contained"
+                onClick={() => resendConfirmationCode(inputs.email)}
+              >
+                Resend code
               </Button>
             </Box>
           </Box>
