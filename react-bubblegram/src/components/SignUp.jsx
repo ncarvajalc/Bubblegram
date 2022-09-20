@@ -44,6 +44,7 @@ export default function SignUp() {
         },
       });
       await API.graphql(graphqlOperation(createUser, { input: GQLUser }));
+      if (error) setError(null);
       setConfirmationMode(true);
     } catch (error) {
       console.error("error signing up:", error);
@@ -67,7 +68,7 @@ export default function SignUp() {
       await Auth.confirmSignUp(username, code);
       signIn(username, inputs.password);
     } catch (error) {
-      console.erro("error confirming sign up", error);
+      console.error("error confirming sign up", error);
       setError(error.message);
     }
   }
