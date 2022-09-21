@@ -1,6 +1,6 @@
 import { DataStore, Amplify, Predicates } from 'aws-amplify';
 import awsconfig from '../aws-exports';
-import { User } from '../models';
+import { Post, User } from '../models';
 
 Amplify.configure(awsconfig);
 
@@ -26,6 +26,39 @@ export class UserStorage {
         // TODO: Test delete method
         const userModel = await DataStore.query(User, userToDelete.id);   
         DataStore.delete(userModel);
-        DataStore.clear();
+    }
+    static async updateComments() {
+
+    }
+}
+/**
+ * type Post @model {
+                id: ID!
+                title: String
+                picture_url: String!
+                likes: Int
+                owner: User @belongsTo
+                comments: [Comment] @hasMany
+              }
+ */
+export class PostStorage {
+    static async upload(newUserPost) {
+        const newPost = {
+            title: newUserPost.title,
+            picture_url: newUserPost.picture_url,
+            likes: 0,
+            owner: newUserPost.ownerId,
+            comments: []
+        };
+        await DataStore.save(new Post(newPost));
+        trackPost(newUserPost);
+        function trackPost(post) {
+            const original = DataStore.query(User, post.owner);
+            DataStore.save(
+                User.copyOf(original, updated => {
+                    updated.posts.push(post);
+                })
+            )
+        }
     }
 }
