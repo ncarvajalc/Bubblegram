@@ -31,7 +31,7 @@ type Comment @model {
 
 type FriendRequest @model {
   id: ID!
-  sender: User @belongsTo
-  receiver: User @belongsTo
-  status: String
+  sender: User! @belongsTo
+  receiver: User! @belongsTo
+  isAccepted: Boolean
 }
