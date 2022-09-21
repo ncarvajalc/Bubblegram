@@ -25,14 +25,14 @@ export class UserStorage {
     }
 }
 export class PostStorage {
-    static async upload(sender, post) {
+    static async storePost(sender, post) {
         const newPost = {
             title: post.title,
             picture_url: post.picture_url,
             likes: 0,
             owner: sender
         };
-        const newPostModel = new Post(newPost));
+        const newPostModel = new Post(newPost);
         await DataStore.save(newPostModel);
         mapPostToUser(sender, newPostModel);
         async function mapPostToUser(sender, postModel) {
@@ -43,10 +43,14 @@ export class PostStorage {
             }
             newPostHistory.push(postModel);
             await DataStore.save(
-                User.copyOf(original, updated => {
+                User.copyOf(sender, updated => {
                     updated.posts = newPostHistory;
                 })
             )
         }
+    }
+    static async show() {
+        const userData = DataStore.query(User, "07e452b7-5bf2-49c1-9d0e-b7a9b570b529");
+        console.log(userData);
     }
 }
