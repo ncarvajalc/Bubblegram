@@ -1,4 +1,4 @@
-import { DataStore, Amplify, Predicates } from 'aws-amplify';
+import { DataStore, Amplify } from 'aws-amplify';
 import awsconfig from '../aws-exports';
 import { Post, User } from '../models';
 
@@ -11,17 +11,13 @@ export class UserStorage {
             user_id: newUser.user_id,
             email: newUser.email,
             username: newUser.username,
-            posts: [],
-            friends: [],
-            comments: [],
-            friend_requests: []
         }
         const userModel = new User(userInformation);
         await DataStore.save(userModel);
     }
     static async loadUserInformation() {
-        const data = await DataStore.query(User);
-        console.log(data);
+        const retrievedUser = await DataStore.query(User);
+        return retrievedUser;
     }
     static async deleteUserData(userToDelete) {
         const userModel = await DataStore.query(User, userToDelete.id);   
@@ -29,21 +25,26 @@ export class UserStorage {
     }
 }
 export class PostStorage {
-    static async upload(newUserPost) {
+    static async upload(sender, post) {
         const newPost = {
-            title: newUserPost.title,
-            picture_url: newUserPost.picture_url,
+            title: post.title,
+            picture_url: post.picture_url,
             likes: 0,
-            owner: newUserPost.ownerId,
-            comments: []
+            owner: sender
         };
-        await DataStore.save(new Post(newPost));
-        trackPost(newUserPost);
-        function trackPost(post) {
-            const original = DataStore.query(User, post.owner);
-            DataStore.save(
+        const newPostModel = new Post(newPost));
+        await DataStore.save(newPostModel);
+        mapPostToUser(sender, newPostModel);
+        async function mapPostToUser(sender, postModel) {
+            const hasNoPost = typeof(sender.posts) == 'undefined';
+            let newPostHistory = sender.posts;
+            if (hasNoPost) {
+                newPostHistory = [];
+            }
+            newPostHistory.push(postModel);
+            await DataStore.save(
                 User.copyOf(original, updated => {
-                    updated.posts.push(post);
+                    updated.posts = newPostHistory;
                 })
             )
         }
