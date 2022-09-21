@@ -14,7 +14,7 @@ import { Tooltip } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
-import { feedURL, signInURL } from "../App";
+import { feedURL, signInURL, uploadURL } from "../App";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -122,10 +122,18 @@ const NavBar = () => {
                 <MenuItem
                   onClick={() => {
                     handleCloseNavMenu();
-                    navigate("/feed");
+                    navigate(feedURL);
                   }}
                 >
                   <Typography textAlign="center">Feed</Typography>
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleCloseNavMenu();
+                    navigate(uploadURL);
+                  }}
+                >
+                  <Typography textAlign="center">Upload image</Typography>
                 </MenuItem>
               </Menu>
             </Box>
@@ -162,6 +170,15 @@ const NavBar = () => {
                   sx={{ my: 2, color: "inherit", display: "block", mx: 1 }}
                 >
                   Feed
+                </Button>
+                <Button
+                  onClick={() => {
+                    handleCloseNavMenu();
+                    navigate(uploadURL);
+                  }}
+                  sx={{ my: 2, color: "inherit", display: "block", mx: 1 }}
+                >
+                  Upload image
                 </Button>
               </Box>
               <Box sx={{ flexGrow: 0 }}>
