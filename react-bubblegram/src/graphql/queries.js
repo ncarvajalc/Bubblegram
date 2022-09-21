@@ -56,7 +56,7 @@ export const getUser = /* GraphQL */ `
       friend_requests {
         items {
           id
-          status
+          isAccepted
           createdAt
           updatedAt
           _version
@@ -527,7 +527,7 @@ export const getFriendRequest = /* GraphQL */ `
         _lastChangedAt
         userFriendsId
       }
-      status
+      isAccepted
       createdAt
       updatedAt
       _version
@@ -568,7 +568,7 @@ export const listFriendRequests = /* GraphQL */ `
           _lastChangedAt
           userFriendsId
         }
-        status
+        isAccepted
         createdAt
         updatedAt
         _version
@@ -618,7 +618,7 @@ export const syncFriendRequests = /* GraphQL */ `
           _lastChangedAt
           userFriendsId
         }
-        status
+        isAccepted
         createdAt
         updatedAt
         _version

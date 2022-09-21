@@ -56,7 +56,7 @@ export const onCreateUser = /* GraphQL */ `
       friend_requests {
         items {
           id
-          status
+          isAccepted
           createdAt
           updatedAt
           _version
@@ -131,7 +131,7 @@ export const onUpdateUser = /* GraphQL */ `
       friend_requests {
         items {
           id
-          status
+          isAccepted
           createdAt
           updatedAt
           _version
@@ -206,7 +206,7 @@ export const onDeleteUser = /* GraphQL */ `
       friend_requests {
         items {
           id
-          status
+          isAccepted
           createdAt
           updatedAt
           _version
@@ -665,7 +665,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
         _lastChangedAt
         userFriendsId
       }
-      status
+      isAccepted
       createdAt
       updatedAt
       _version
@@ -733,7 +733,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
         _lastChangedAt
         userFriendsId
       }
-      status
+      isAccepted
       createdAt
       updatedAt
       _version
@@ -801,7 +801,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
         _lastChangedAt
         userFriendsId
       }
-      status
+      isAccepted
       createdAt
       updatedAt
       _version
