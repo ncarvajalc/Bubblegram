@@ -282,7 +282,7 @@ export const schema = {
                     "type": {
                         "model": "User"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
@@ -295,17 +295,17 @@ export const schema = {
                     "type": {
                         "model": "User"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
                         "targetName": "userFriend_requestsId"
                     }
                 },
-                "status": {
-                    "name": "status",
+                "isAccepted": {
+                    "name": "isAccepted",
                     "isArray": false,
-                    "type": "String",
+                    "type": "Boolean",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -338,5 +338,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "e8a8df3f870b51af2e4dbfb3770b3656"
+    "version": "33963fe5c1af498e375241228f9671f6"
 };

@@ -57,9 +57,9 @@ export declare class Comment {
 
 export declare class FriendRequest {
   readonly id: string;
-  readonly sender?: User | null;
-  readonly receiver?: User | null;
-  readonly status?: string | null;
+  readonly sender: User;
+  readonly receiver: User;
+  readonly isAccepted?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<FriendRequest, FriendRequestMetaData>);
