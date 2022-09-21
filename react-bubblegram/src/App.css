@@ -1,0 +1,10 @@
+#App {
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  min-width: 400px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overscroll-behavior: none;
+  transition: all .5s;
+}

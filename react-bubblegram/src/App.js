@@ -15,12 +15,14 @@ function App() {
   return (
     <>
       <NavBar />
-      <Routes>
-        <Route path={homeURL} element={<Home />} />
-        <Route path={signUpURL} element={<SignUp />} />
-        <Route path={signInURL} element={<SignIn />} />
-        <Route path={feedURL} element={<Feed />} />
-      </Routes>
+      <div id="App">
+        <Routes>
+          <Route path={homeURL} element={<Home />} />
+          <Route path={signUpURL} element={<SignUp />} />
+          <Route path={signInURL} element={<SignIn />} />
+          <Route path={feedURL} element={<Feed />} />
+        </Routes>
+      </div>
     </>
   );
 }
