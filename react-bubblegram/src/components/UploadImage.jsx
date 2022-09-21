@@ -1,4 +1,4 @@
-import { Box, Button, Slider } from "@mui/material";
+import { Box, Button, Container, Slider, TextField } from "@mui/material";
 import UploadIcon from "@mui/icons-material/Upload";
 import { Storage, API, Auth } from "aws-amplify";
 import { useCallback, useEffect, useState } from "react";
@@ -17,7 +17,7 @@ export default function UploadImage() {
   const [preview, setPreview] = useState();
   const [loading, setLoading] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
-  //   const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState({});
   const [user, setUser] = useState({});
 
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -27,6 +27,9 @@ export default function UploadImage() {
   function onCropComplete(croppedArea, croppedAreaPixels) {
     setCroppedArea(croppedAreaPixels);
     showCroppedImage();
+  }
+  function handleChange(event) {
+    setInputs({ ...inputs, [event.target.name]: event.target.value });
   }
 
   useEffect(() => {
@@ -81,7 +84,7 @@ export default function UploadImage() {
           console.log(url);
           console.log(user);
           const postDetails = {
-            title: "test",
+            title: inputs.title,
             picture_url: url,
             likes: 0,
             userPostsId: user.id,
@@ -146,69 +149,107 @@ export default function UploadImage() {
   }, [croppedArea, preview]);
 
   return (
-    <div>
-      <Button variant="contained" component="label">
-        Choose picture
-        <input
-          type="file"
-          accept="image/png, image/gif, image/jpeg"
-          onChange={onChange}
-          required
-          hidden
-        />
-      </Button>
-      {selectedFile && (
-        <Box position="relative" width={cropWidth} height={cropHeight}>
-          <Cropper
-            image={preview}
-            crop={crop}
-            zoom={zoom}
-            aspect={aspect}
-            cropShape="round"
-            showGrid={false}
-            onCropChange={setCrop}
-            onCropAreaChange={onCropComplete}
-            onZoomChange={setZoom}
-          />
+    <Container maxWidth="xs" sx={{ my: 8 }}>
+      <div className="bubble">
+        {selectedFile && (
           <Box
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: "50%",
-              width: "50%",
-              transform: "translateX(-50%)",
-              height: "80px",
-              display: "flex",
-              alignItems: "center",
-            }}
+            className="img-background"
+            position="relative"
+            width={cropWidth}
+            height={cropHeight}
+            sx={{ m: 4 }}
           >
-            <Slider
-              value={zoom}
-              min={1}
-              max={3}
-              step={0.1}
-              aria-labelledby="Zoom"
-              onChange={(e, zoom) => setZoom(zoom)}
+            <Cropper
+              image={preview}
+              crop={crop}
+              zoom={zoom}
+              aspect={aspect}
+              cropShape="round"
+              showGrid={false}
+              onCropChange={setCrop}
+              onCropAreaChange={onCropComplete}
+              onZoomChange={setZoom}
             />
+            <Box
+              style={{
+                position: "absolute",
+                bottom: 0,
+                left: "50%",
+                width: "50%",
+                transform: "translateX(-50%)",
+                height: "80px",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Slider
+                value={zoom}
+                min={1}
+                max={3}
+                step={0.1}
+                aria-labelledby="Zoom"
+                onChange={(e, zoom) => setZoom(zoom)}
+              />
+            </Box>
           </Box>
-        </Box>
-      )}
+        )}
+        <TextField
+          required
+          name="title"
+          label="Caption"
+          autoComplete="off"
+          variant="outlined"
+          onChange={handleChange}
+        />
+        <Button variant="contained" component="label" sx={{ my: 1 }}>
+          Choose picture
+          <input
+            type="file"
+            accept="image/png, image/gif, image/jpeg"
+            onChange={onChange}
+            required
+            hidden
+          />
+        </Button>
 
-      <Box>
-        <LoadingButton
-          sx={{ mr: 1 }}
-          size="small"
-          color="secondary"
-          onClick={onSubmit}
-          loading={loading}
-          loadingPosition="start"
-          startIcon={<UploadIcon />}
-          variant="contained"
-          disabled={!imageLoaded}
-        >
-          Upload
-        </LoadingButton>
-      </Box>
-    </div>
+        <Box>
+          <LoadingButton
+            sx={{ my: 1 }}
+            size="small"
+            color="secondary"
+            onClick={onSubmit}
+            loading={loading}
+            loadingPosition="start"
+            startIcon={<UploadIcon />}
+            variant="contained"
+            disabled={!imageLoaded}
+          >
+            Upload
+          </LoadingButton>
+        </Box>
+      </div>
+    </Container>
   );
 }
+
+// <div className="bubble">
+// <div className="img-background">
+//   <img className="bubble-img" src={post.picture_url} />
+// </div>
+// <div className="card-content">
+//   <Typography variant="body2" color="text.secondary">
+//     {post.title}
+//   </Typography>
+//   <Typography variant="body2" color="text.secondary">
+//     {post.likes} likes
+//   </Typography>
+// </div>
+// <div className="card-actions">
+//   <Button size="small" onClick={handleLike}>
+//     Like
+//   </Button>
+//   <Button size="small" onClick={handlePop}>
+//     Pop
+//   </Button>
+// </div>
+// </div>
