@@ -9,12 +9,6 @@ export default function Feed() {
   const [user, setUser] = useState(null)
   const [authenticated, setAuthenticated] = useState(false)
 
-  useEffect(() => {
-    async () => {
-      const user = await API.graphql(graphqlOperation(getUser));
-      console.log(user)
-    }
-  }, []);
 
   //sample data 
   let posts = [
