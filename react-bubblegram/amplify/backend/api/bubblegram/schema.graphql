@@ -5,6 +5,7 @@ input AMPLIFY {
 } # FOR TESTING ONLY!
 type User @model {
   id: ID!
+  user_id: ID!
   email: String!
   username: String!
   posts: [Post] @hasMany
