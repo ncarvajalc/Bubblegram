@@ -5,8 +5,10 @@ import "../styles/Bubble.css"
 
 function Bubble({ post }) {
 
+  const [likes, setLikes] = useState(post.likes)
+
   function handleLike () {
-    console.log(`liked post #${post.id}`)
+    
   }
 
   function handlePop () {
