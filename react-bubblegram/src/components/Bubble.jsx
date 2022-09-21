@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import "../styles/Bubble.css";
+import { PostStorage } from '../storage/storage';
 
 function Bubble({ post }) {
   const [likes, setLikes] = useState(post.likes);
 
-  function handleLike() {}
+  function handleLike() {
+    PostStorage.likePost(post);
+  }
 
   function handlePop() {
     console.log(`popped post #${post.id}`);
