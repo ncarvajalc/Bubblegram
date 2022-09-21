@@ -1,0 +1,10 @@
+.user-feed {
+  display: grid;
+  justify-content: center;
+  grid-template-rows: repeat(260px);
+  grid-template-columns: repeat(auto-fit, minmax(350px, 30%));
+  padding: 50px 0;
+  row-gap: 50px;
+  column-gap: 2%;
+  min-width: 100%;
+}

@@ -125,7 +125,7 @@ const NavBar = () => {
                     navigate(feedURL);
                   }}
                 >
-                  <Typography textAlign="center">Feed</Typography>
+                  <Typography textAlign="center">My Bubbles</Typography>
                 </MenuItem>
                 <MenuItem
                   onClick={() => {
@@ -169,7 +169,7 @@ const NavBar = () => {
                   }}
                   sx={{ my: 2, color: "inherit", display: "block", mx: 1 }}
                 >
-                  Feed
+                  My Bubbles
                 </Button>
                 <Button
                   onClick={() => {
