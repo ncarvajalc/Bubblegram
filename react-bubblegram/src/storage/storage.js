@@ -50,7 +50,7 @@ export class PostStorage {
         }
     }
     static async show() {
-        const userData = DataStore.query(User, "07e452b7-5bf2-49c1-9d0e-b7a9b570b529");
+        const userData = DataStore.query(Post);
         console.log(userData);
     }
 }
