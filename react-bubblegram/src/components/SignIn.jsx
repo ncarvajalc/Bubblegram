@@ -78,6 +78,7 @@ function SignIn() {
               name="password"
               label="password"
               onChange={handleChange}
+              type="password"
             />
           </Box>
           <Box>
