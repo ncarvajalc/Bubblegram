@@ -5,7 +5,6 @@ input AMPLIFY {
 } # FOR TESTING ONLY!
 type User @model {
   id: ID!
-  user_id: ID!
   email: String!
   username: String!
   posts: [Post] @hasMany
@@ -32,7 +31,7 @@ type Comment @model {
 
 type FriendRequest @model {
   id: ID!
-  sender: User @belongsTo
-  receiver: User @belongsTo
-  status: String
+  sender: User! @belongsTo
+  receiver: User! @belongsTo
+  isAccepted: Boolean
 }

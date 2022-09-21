@@ -10,13 +10,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "user_id": {
-                    "name": "user_id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "email": {
                     "name": "email",
                     "isArray": false,
@@ -289,7 +282,7 @@ export const schema = {
                     "type": {
                         "model": "User"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
@@ -302,17 +295,17 @@ export const schema = {
                     "type": {
                         "model": "User"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
                         "targetName": "userFriend_requestsId"
                     }
                 },
-                "status": {
-                    "name": "status",
+                "isAccepted": {
+                    "name": "isAccepted",
                     "isArray": false,
-                    "type": "String",
+                    "type": "Boolean",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -345,5 +338,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "7280dc2ec0ea572cd8776cd53fa2dd21"
+    "version": "33963fe5c1af498e375241228f9671f6"
 };

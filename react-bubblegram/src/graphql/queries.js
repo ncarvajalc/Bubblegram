@@ -8,18 +8,62 @@ export const getUser = /* GraphQL */ `
       email
       username
       posts {
+        items {
+          id
+          title
+          picture_url
+          likes
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userPostsId
+        }
         nextToken
         startedAt
       }
       friends {
+        items {
+          id
+          email
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriendsId
+        }
         nextToken
         startedAt
       }
       comments {
+        items {
+          id
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userCommentsId
+          postCommentsId
+        }
         nextToken
         startedAt
       }
       friend_requests {
+        items {
+          id
+          isAccepted
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriend_requestsId
+        }
         nextToken
         startedAt
       }
@@ -43,6 +87,22 @@ export const listUsers = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -72,6 +132,22 @@ export const syncUsers = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -95,6 +171,22 @@ export const getPost = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -103,6 +195,17 @@ export const getPost = /* GraphQL */ `
         userFriendsId
       }
       comments {
+        items {
+          id
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userCommentsId
+          postCommentsId
+        }
         nextToken
         startedAt
       }
@@ -127,6 +230,21 @@ export const listPosts = /* GraphQL */ `
         title
         picture_url
         likes
+        owner {
+          id
+          email
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriendsId
+        }
+        comments {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -157,6 +275,21 @@ export const syncPosts = /* GraphQL */ `
         title
         picture_url
         likes
+        owner {
+          id
+          email
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriendsId
+        }
+        comments {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -178,6 +311,21 @@ export const getComment = /* GraphQL */ `
         title
         picture_url
         likes
+        owner {
+          id
+          email
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriendsId
+        }
+        comments {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -190,6 +338,22 @@ export const getComment = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -216,7 +380,30 @@ export const listComments = /* GraphQL */ `
     listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        post {
+          id
+          title
+          picture_url
+          likes
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userPostsId
+        }
         content
+        creator {
+          id
+          email
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriendsId
+        }
         createdAt
         updatedAt
         _version
@@ -245,7 +432,30 @@ export const syncComments = /* GraphQL */ `
     ) {
       items {
         id
+        post {
+          id
+          title
+          picture_url
+          likes
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userPostsId
+        }
         content
+        creator {
+          id
+          email
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriendsId
+        }
         createdAt
         updatedAt
         _version
@@ -267,6 +477,22 @@ export const getFriendRequest = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -278,6 +504,22 @@ export const getFriendRequest = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -285,7 +527,7 @@ export const getFriendRequest = /* GraphQL */ `
         _lastChangedAt
         userFriendsId
       }
-      status
+      isAccepted
       createdAt
       updatedAt
       _version
@@ -304,7 +546,29 @@ export const listFriendRequests = /* GraphQL */ `
     listFriendRequests(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        status
+        sender {
+          id
+          email
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriendsId
+        }
+        receiver {
+          id
+          email
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriendsId
+        }
+        isAccepted
         createdAt
         updatedAt
         _version
@@ -332,7 +596,29 @@ export const syncFriendRequests = /* GraphQL */ `
     ) {
       items {
         id
-        status
+        sender {
+          id
+          email
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriendsId
+        }
+        receiver {
+          id
+          email
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriendsId
+        }
+        isAccepted
         createdAt
         updatedAt
         _version

@@ -2,6 +2,7 @@ import { DataStore, Amplify, Predicates } from 'aws-amplify';
 import awsconfig from '../aws-exports';
 import { Post, User } from '../models';
 
+
 Amplify.configure(awsconfig);
 
 export class UserStorage {
@@ -23,24 +24,10 @@ export class UserStorage {
         console.log(data);
     }
     static async deleteUserData(userToDelete) {
-        // TODO: Test delete method
         const userModel = await DataStore.query(User, userToDelete.id);   
         DataStore.delete(userModel);
     }
-    static async updateComments() {
-
-    }
 }
-/**
- * type Post @model {
-                id: ID!
-                title: String
-                picture_url: String!
-                likes: Int
-                owner: User @belongsTo
-                comments: [Comment] @hasMany
-              }
- */
 export class PostStorage {
     static async upload(newUserPost) {
         const newPost = {

@@ -8,18 +8,62 @@ export const onCreateUser = /* GraphQL */ `
       email
       username
       posts {
+        items {
+          id
+          title
+          picture_url
+          likes
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userPostsId
+        }
         nextToken
         startedAt
       }
       friends {
+        items {
+          id
+          email
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriendsId
+        }
         nextToken
         startedAt
       }
       comments {
+        items {
+          id
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userCommentsId
+          postCommentsId
+        }
         nextToken
         startedAt
       }
       friend_requests {
+        items {
+          id
+          isAccepted
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriend_requestsId
+        }
         nextToken
         startedAt
       }
@@ -39,18 +83,62 @@ export const onUpdateUser = /* GraphQL */ `
       email
       username
       posts {
+        items {
+          id
+          title
+          picture_url
+          likes
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userPostsId
+        }
         nextToken
         startedAt
       }
       friends {
+        items {
+          id
+          email
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriendsId
+        }
         nextToken
         startedAt
       }
       comments {
+        items {
+          id
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userCommentsId
+          postCommentsId
+        }
         nextToken
         startedAt
       }
       friend_requests {
+        items {
+          id
+          isAccepted
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriend_requestsId
+        }
         nextToken
         startedAt
       }
@@ -70,18 +158,62 @@ export const onDeleteUser = /* GraphQL */ `
       email
       username
       posts {
+        items {
+          id
+          title
+          picture_url
+          likes
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userPostsId
+        }
         nextToken
         startedAt
       }
       friends {
+        items {
+          id
+          email
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriendsId
+        }
         nextToken
         startedAt
       }
       comments {
+        items {
+          id
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userCommentsId
+          postCommentsId
+        }
         nextToken
         startedAt
       }
       friend_requests {
+        items {
+          id
+          isAccepted
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriend_requestsId
+        }
         nextToken
         startedAt
       }
@@ -105,6 +237,22 @@ export const onCreatePost = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -113,6 +261,17 @@ export const onCreatePost = /* GraphQL */ `
         userFriendsId
       }
       comments {
+        items {
+          id
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userCommentsId
+          postCommentsId
+        }
         nextToken
         startedAt
       }
@@ -136,6 +295,22 @@ export const onUpdatePost = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -144,6 +319,17 @@ export const onUpdatePost = /* GraphQL */ `
         userFriendsId
       }
       comments {
+        items {
+          id
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userCommentsId
+          postCommentsId
+        }
         nextToken
         startedAt
       }
@@ -167,6 +353,22 @@ export const onDeletePost = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -175,6 +377,17 @@ export const onDeletePost = /* GraphQL */ `
         userFriendsId
       }
       comments {
+        items {
+          id
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userCommentsId
+          postCommentsId
+        }
         nextToken
         startedAt
       }
@@ -196,6 +409,21 @@ export const onCreateComment = /* GraphQL */ `
         title
         picture_url
         likes
+        owner {
+          id
+          email
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriendsId
+        }
+        comments {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -208,6 +436,22 @@ export const onCreateComment = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -234,6 +478,21 @@ export const onUpdateComment = /* GraphQL */ `
         title
         picture_url
         likes
+        owner {
+          id
+          email
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriendsId
+        }
+        comments {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -246,6 +505,22 @@ export const onUpdateComment = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -272,6 +547,21 @@ export const onDeleteComment = /* GraphQL */ `
         title
         picture_url
         likes
+        owner {
+          id
+          email
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          userFriendsId
+        }
+        comments {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -284,6 +574,22 @@ export const onDeleteComment = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -309,6 +615,22 @@ export const onCreateFriendRequest = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -320,6 +642,22 @@ export const onCreateFriendRequest = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -327,7 +665,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
         _lastChangedAt
         userFriendsId
       }
-      status
+      isAccepted
       createdAt
       updatedAt
       _version
@@ -345,6 +683,22 @@ export const onUpdateFriendRequest = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -356,6 +710,22 @@ export const onUpdateFriendRequest = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -363,7 +733,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
         _lastChangedAt
         userFriendsId
       }
-      status
+      isAccepted
       createdAt
       updatedAt
       _version
@@ -381,6 +751,22 @@ export const onDeleteFriendRequest = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -392,6 +778,22 @@ export const onDeleteFriendRequest = /* GraphQL */ `
         id
         email
         username
+        posts {
+          nextToken
+          startedAt
+        }
+        friends {
+          nextToken
+          startedAt
+        }
+        comments {
+          nextToken
+          startedAt
+        }
+        friend_requests {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -399,7 +801,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
         _lastChangedAt
         userFriendsId
       }
-      status
+      isAccepted
       createdAt
       updatedAt
       _version

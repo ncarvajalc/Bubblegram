@@ -10,6 +10,11 @@
       "StackName": "amplify-bubblegram-dev-95441",
       "StackId": "arn:aws:cloudformation:us-east-1:463439488459:stack/amplify-bubblegram-dev-95441/294d4960-38f4-11ed-b763-0ecb1f753d3d",
       "AmplifyAppId": "d1ete9fo85py3"
+    },
+    "categories": {
+      "auth": {
+        "bubblegramfcdedd4b": {}
+      }
     }
   }
 }
