@@ -1,4 +1,4 @@
-import { DataStore, Amplify, Predicates } from "aws-amplify";
+import { DataStore, Amplify } from "aws-amplify";
 import awsconfig from "../aws-exports";
 import { User } from "../models";
 
