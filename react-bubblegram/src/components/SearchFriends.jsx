@@ -17,6 +17,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { UserStorage } from '../storage/storage';
 
 export default function SearchFriends() {
   const [search, setSearch] = useState("");
@@ -60,7 +61,10 @@ export default function SearchFriends() {
     try {
       //   const GQLUser = { id: user.id };
       //   const GQLSearched = { id: id };
-      // TODO follow friend (Add to friends array)
+      const userId = { id: user.id };
+      const friendsId = { id: id };
+      UserStorage.addFriendToFriendList(userId, friendsId);
+      // TODO: test this function out with other teammates
     } catch (error) {
       console.error("error following user", error);
     }
