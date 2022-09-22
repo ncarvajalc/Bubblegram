@@ -81,27 +81,23 @@ export default function UploadImage() {
           contentType: "image",
         }
       );
-      Storage.get(object.key)
-        .then((url) => {
-          console.log(url);
-          console.log(user);
-          const postDetails = {
-            title: inputs.title,
-            picture_url: url,
-            likes: 0,
-            userPostsId: user.id,
-          };
-          API.graphql({
-            query: createPost,
-            variables: { input: postDetails },
-          }).then(() => {
-            setLoading(false);
-            setImageLoaded(false);
-            setPreview(undefined);
-            setSelectedFile(undefined);
-          });
-        })
-        .catch((err) => console.error(err));
+
+      console.log(user);
+      const postDetails = {
+        title: inputs.title,
+        picture_url: object.key,
+        likes: 0,
+        userPostsId: user.id,
+      };
+      API.graphql({
+        query: createPost,
+        variables: { input: postDetails },
+      }).then(() => {
+        setLoading(false);
+        setImageLoaded(false);
+        setPreview(undefined);
+        setSelectedFile(undefined);
+      });
     } catch (error) {
       console.error("Error uploading file: ", error);
     }
