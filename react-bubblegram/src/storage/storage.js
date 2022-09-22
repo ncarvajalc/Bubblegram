@@ -1,9 +1,10 @@
 import { DataStore, Amplify, API } from 'aws-amplify';
-import * as mutations from '../graphql/mutations';
-
 import awsconfig from '../aws-exports';
 import { Post, User } from '../models';
 
+import * as mutations from '../graphql/mutations';
+import * as queries from '../graphql/queries';
+import * as subscriptions from '../graphql/subscriptions';
 
 Amplify.configure(awsconfig);
 
@@ -26,9 +27,8 @@ export class UserStorage {
         const userModel = await DataStore.query(User, userToDelete.id);   
         DataStore.delete(userModel);
     }
-    static async loadAll() {
-        const loadedValue = await DataStore.query(User);
-        console.log(loadedValue);
+    static async addFriendToFriendList(user, friend) {
+
     }
 }
 export class PostStorage {
@@ -56,18 +56,24 @@ export class PostStorage {
             )
         }
     }
-    static async sortPostById() {
-        const getData = await DataStore.query(User);
-        console.log(getData);
-    }
     static async likePost(post) {
-        const postId = post.id;
-        const postToLike = await DataStore.query(Post, post.id);
-        const likePost = await DataStore.save(
-            Post.copyOf(postToLike, updated => {
-                updated.likes = postToLike.likes + 1;
-            })
-        );
+        const updateDetails = {
+            id: post.id,
+            likes: post.likes + 1
+        }
+        const updatePostDetails = await API.graphql(
+            { query: mutations.updatePost, variables: { input: updateDetails}}
+        )
+        updateOffline(post);
+        async function updateOffline(post) {
+            const postModel = await DataStore.query(Post, post.id);
+            const newLikes = postModel.likes + 1;
+            const updatedPost = await DataStore.save(
+                Post.copyOf(postModel, updated => {
+                    updated.likes = newLikes
+                })
+            );
+        }
     }
     static async retrieveLikes(post) {
         const postId = post.id;

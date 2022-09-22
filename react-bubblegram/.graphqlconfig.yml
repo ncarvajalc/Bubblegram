@@ -1,6 +1,6 @@
 projects:
   bubblegram:
-    schemaPath: src/graphql/schema.json
+    schemaPath: amplify/backend/api/bubblegram/build/schema.graphql
     includes:
       - src/graphql/**/*.js
     excludes:
