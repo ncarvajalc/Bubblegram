@@ -14,7 +14,6 @@ export class UserStorage {
             user_id: newUser.user_id,
             email: newUser.email,
             username: newUser.username,
-            posts: [null]
         }
         const userModel = new User(userInformation);
         await DataStore.save(userModel);
@@ -23,27 +22,32 @@ export class UserStorage {
         const retrievedUser = await DataStore.query(User, userId);
         return retrievedUser;
     }
-    static async deleteUserData(userToDelete) {
-        const userModel = await DataStore.query(User, userToDelete.id);   
-        DataStore.delete(userModel);
+    static async deleteUserData() {
+        // TODO: implement this code if have time
     }
     static async addFriendToFriendList(userId, friendId) {
         const userModel = await DataStore.query(User, userId);
         const friendModel = await DataStore.query(User, friendId);
         let newFriendList = userModel.friends;
+
+        // checks if the data exists
         const hasFriends = typeof(newFriendList) === 'undefined';
         if (!hasFriends) {
             newFriendList = [];
         }
         newFriendList.push(friendModel);
-        const updatedFriendDetails = {
-            id: userId,
-            friends: newFriendList
-        }
-        await API.graphql(
-            { query: mutations.updateUser, variables: { input: updatedFriendDetails }
-        });
+        updateFriendListRealTime(userId, newFriendList);
         updateFriendListOffline(userModel, newFriendList);
+
+        async function updateFriendListRealTime(userId, friendList) {
+            const updatedFriendDetails = {
+                id: userId,
+                friends: friendList
+            }
+            await API.graphql(
+                { query: mutations.updateUser, variables: { input: updatedFriendDetails }
+            });
+        }
         async function updateFriendListOffline(user, newFriendList) {
             await DataStore.save(
                 User.copyOf(userModel, updated => {
@@ -80,13 +84,7 @@ export class PostStorage {
     }
     static async likePost(post) {
         const postModel = await DataStore.query(Post, post.id);
-        const updateDetails = {
-            id: post.id,
-            likes: postModel.likes + 1
-        }
-        const updatePostDetails = await API.graphql(
-            { query: mutations.updatePost, variables: { input: updateDetails}}
-        )
+        updateLikesRealTime(postModel);
         updateLikesOffline(postModel);
         async function updateLikesOffline(postModel) {
             const newLikes = postModel.likes + 1;
@@ -95,6 +93,15 @@ export class PostStorage {
                     updated.likes = newLikes
                 })
             );
+        }
+        async function updateLikesRealTime(postModel) {
+            const updateDetails = {
+                id: postModel.id,
+                likes: postModel.likes + 1
+            }
+            const updatePostDetails = await API.graphql(
+                { query: mutations.updatePost, variables: { input: updateDetails}}
+            )
         }
     }
     static async retrieveLikes(post) {
