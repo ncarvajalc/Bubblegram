@@ -174,7 +174,7 @@ export default function Home() {
             </div>
             <Typography variant="body1">
               "I love the way I can share my pictures. Just open the app and
-              upload your buuble, you will be able to share it with your friends
+              upload your bubble, you will be able to share it with your friends
               in no time!"
             </Typography>
             <b>James Rayner</b>
