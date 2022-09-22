@@ -142,10 +142,6 @@ const NavBar = () => {
                       x
                     </button>
                   </div>
-                  <div className="modal-body">
-                    <input onChange={console.log("hey")} value={"hey"}></input>
-                    <button onClick={console.log("click")}>Save</button>
-                  </div>
                 </div>
                 <div id={modal ? "overlay-active" : "overlay"}> </div>
                 {/* MODAL ------------------------------------------------------------------ */}

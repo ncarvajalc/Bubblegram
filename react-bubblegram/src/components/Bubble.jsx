@@ -10,8 +10,8 @@ function Bubble({ post }) {
   const [imageUrl, setImageUrl] = useState(null);
   Storage.get(post.picture_url).then((url) => setImageUrl(url));
 
-  function handleLike() {
-    PostStorage.likePost(post);
+  function handleLike(postClicked) {
+    PostStorage.likePost(postClicked);
     setLikes(likes + 1);
   }
 
@@ -33,7 +33,7 @@ function Bubble({ post }) {
         </Typography>
       </div>
       <div className="card-actions">
-        <Button size="small" onClick={handleLike}>
+        <Button size="small" onClick={() => handleLike(post)}>
           Like
         </Button>
         <Button size="small" onClick={handlePop}>

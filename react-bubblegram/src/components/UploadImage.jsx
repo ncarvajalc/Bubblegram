@@ -133,16 +133,18 @@ export default function UploadImage({ setModal }) {
 
   const showCroppedImage = useCallback(async () => {
     try {
-      cropImage(
-        preview,
-        croppedArea?.width ?? preview.height,
-        croppedArea?.height ?? preview.height,
-        croppedArea?.x ?? 0,
-        croppedArea?.y ?? 0,
-        (croppedImageTemp) => {
-          setCroppedImage(croppedImageTemp);
-        }
-      );
+      if (croppedArea) {
+        cropImage(
+          preview,
+          croppedArea.width,
+          croppedArea.height,
+          croppedArea.x,
+          croppedArea.y,
+          (croppedImageTemp) => {
+            setCroppedImage(croppedImageTemp);
+          }
+        );
+      }
     } catch (e) {
       console.error(e);
     }
@@ -222,7 +224,7 @@ export default function UploadImage({ setModal }) {
           loadingPosition="start"
           startIcon={<UploadIcon />}
           variant="contained"
-          disabled={!imageLoaded}
+          disabled={!croppedImage}
         >
           Upload
         </LoadingButton>
