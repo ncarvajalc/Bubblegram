@@ -1,4 +1,6 @@
-import { DataStore, Amplify } from 'aws-amplify';
+import { DataStore, Amplify, API } from 'aws-amplify';
+import * as mutations from '../graphql/mutations';
+
 import awsconfig from '../aws-exports';
 import { Post, User } from '../models';
 
@@ -11,28 +13,33 @@ export class UserStorage {
             user_id: newUser.user_id,
             email: newUser.email,
             username: newUser.username,
+            posts: [null]
         }
         const userModel = new User(userInformation);
         await DataStore.save(userModel);
     }
-    static async loadUserInformation() {
-        const retrievedUser = await DataStore.query(User);
+    static async loadUserInformation(userId) {
+        const retrievedUser = await DataStore.query(User, userId);
         return retrievedUser;
     }
     static async deleteUserData(userToDelete) {
         const userModel = await DataStore.query(User, userToDelete.id);   
         DataStore.delete(userModel);
     }
+    static async loadAll() {
+        const loadedValue = await DataStore.query(User);
+        console.log(loadedValue);
+    }
 }
 export class PostStorage {
-    static async upload(sender, post) {
+    static async storePost(sender, post) {
         const newPost = {
             title: post.title,
             picture_url: post.picture_url,
             likes: 0,
             owner: sender
         };
-        const newPostModel = new Post(newPost));
+        const newPostModel = new Post(newPost);
         await DataStore.save(newPostModel);
         mapPostToUser(sender, newPostModel);
         async function mapPostToUser(sender, postModel) {
@@ -43,10 +50,28 @@ export class PostStorage {
             }
             newPostHistory.push(postModel);
             await DataStore.save(
-                User.copyOf(original, updated => {
+                User.copyOf(sender, updated => {
                     updated.posts = newPostHistory;
                 })
             )
         }
+    }
+    static async sortPostById() {
+        const getData = await DataStore.query(User);
+        console.log(getData);
+    }
+    static async likePost(post) {
+        const postToLike = await DataStore.query(Post, post.id);
+        const likePost = await DataStore.save(
+            Post.copyOf(postToLike, updated => {
+                updated.likes = postToLike.likes + 1;
+            })
+        );
+    }
+    static async retrieveLikes(post) {
+        const postId = post.id;
+        const postModel = await DataStore.query(Post, postId);
+        const amountOfLikes = postModel.likes;
+        return amountOfLikes;
     }
 }
