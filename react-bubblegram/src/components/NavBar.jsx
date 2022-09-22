@@ -74,25 +74,7 @@ const NavBar = () => {
     <AppBar position="static" color="secondary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontWeight: 600,
-              color: "inherit",
-              textDecoration: "none",
-              "&:hover": {
-                color: "white",
-                textDecoration: "underline",
-              },
-            }}
-          >
-            Bubblegram
-          </Typography>
+          <img src="https://i.ibb.co/5xLwcyW/final-logo-white.png"/>
           {authenticated ? (
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
@@ -133,14 +115,7 @@ const NavBar = () => {
                 </MenuItem>
                 {/* MODAL------------------------------------------------------------------ */}
                 <div className={modal ? 'modal-active' : 'modal'} id='modal'>
-                    <div className='modal-header'>
-                        <div className='title'>Rename Playlist</div>
-                        <button onClick={() => setModal(false)}className='close-button'>x</button>
-                    </div>
-                    <div className='modal-body'>
-                        <input onChange={console.log("hey")} value={"hey"}></input>
-                        <button onClick={console.log("click")}>Save</button>
-                    </div>
+                  <UploadImage setModal={setModal}/>
                 </div>
                 <div id={modal ? 'overlay-active' : 'overlay'}> </div>
                 {/* MODAL ------------------------------------------------------------------ */}

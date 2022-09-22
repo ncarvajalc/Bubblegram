@@ -95,15 +95,12 @@ export default function SignUp() {
     <Container maxWidth="xs">
       <Box
         sx={{
-          marginTop: 3,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        <Typography component="h1" variant="h4">
-          Bubblegram
-        </Typography>
+        <img src="https://i.ibb.co/yy8mxQx/final-logo-primary.png" id="logo"/>
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <LockOutlinedIcon />
         </Avatar>
