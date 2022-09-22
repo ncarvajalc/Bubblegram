@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 import SignIn from "./components/SignIn";
 import UploadImage from "./components/UploadImage";
+import { TestRunner } from './test';
 import SearchFriends from "./components/SearchFriends";
 
 export const homeURL = "/";
@@ -16,6 +17,7 @@ export const uploadURL = "/upload";
 export const searchFriendsURL = "/search";
 
 function App() {
+  TestRunner.run();
   return (
     <>
       <NavBar />
