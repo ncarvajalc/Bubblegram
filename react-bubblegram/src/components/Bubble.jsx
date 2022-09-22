@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import "../styles/Bubble.css";
 import { Storage } from "aws-amplify";
+import { PostStorage } from '../storage/storage';
 
 function Bubble({ post }) {
   const [likes, setLikes] = useState(post.likes);
@@ -12,7 +13,9 @@ function Bubble({ post }) {
     Storage.get(post.picture_url).then((url) => setImageUrl(url));
   }, [post]);
 
-  function handleLike() {}
+  function handleLike() {
+    PostStorage.likePost(post);
+  }
 
   function handlePop() {
     console.log(`popped post #${post.id}`);
