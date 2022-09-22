@@ -10,7 +10,7 @@ import Cropper from "react-easy-crop";
 
 Storage.configure({ level: "public" });
 
-export default function UploadImage() {
+export default function UploadImage({ setModal }) {
   const cropWidth = 320;
   const cropHeight = cropWidth;
   const [croppedImage, setCroppedImage] = useState(null);
@@ -94,6 +94,7 @@ export default function UploadImage() {
         variables: { input: postDetails },
       }).then(() => {
         setLoading(false);
+        setModal(false)
         setImageLoaded(false);
         setPreview(undefined);
         setSelectedFile(undefined);
