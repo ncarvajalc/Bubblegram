@@ -79,16 +79,16 @@ export class PostStorage {
         }
     }
     static async likePost(post) {
+        const postModel = await DataStore.query(Post, post.id);
         const updateDetails = {
             id: post.id,
-            likes: post.likes + 1
+            likes: postModel.likes + 1
         }
         const updatePostDetails = await API.graphql(
             { query: mutations.updatePost, variables: { input: updateDetails}}
         )
-        updateLikesOffline(post);
-        async function updateLikesOffline(post) {
-            const postModel = await DataStore.query(Post, post.id);
+        updateLikesOffline(postModel);
+        async function updateLikesOffline(postModel) {
             const newLikes = postModel.likes + 1;
             const updatedPost = await DataStore.save(
                 Post.copyOf(postModel, updated => {
@@ -101,6 +101,7 @@ export class PostStorage {
         const postId = post.id;
         const postModel = await DataStore.query(Post, postId);
         const amountOfLikes = postModel.likes;
+        console.log(postModel);
         return amountOfLikes;
     }
 }
