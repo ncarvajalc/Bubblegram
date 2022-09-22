@@ -66,20 +66,6 @@ export const schema = {
                         "associatedWith": "userCommentsId"
                     }
                 },
-                "friend_requests": {
-                    "name": "friend_requests",
-                    "isArray": true,
-                    "type": {
-                        "model": "FriendRequest"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "userFriend_requestsId"
-                    }
-                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -265,78 +251,9 @@ export const schema = {
                     "properties": {}
                 }
             ]
-        },
-        "FriendRequest": {
-            "name": "FriendRequest",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "sender": {
-                    "name": "sender",
-                    "isArray": false,
-                    "type": {
-                        "model": "User"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "userFriend_requestsId"
-                    }
-                },
-                "receiver": {
-                    "name": "receiver",
-                    "isArray": false,
-                    "type": {
-                        "model": "User"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "userFriend_requestsId"
-                    }
-                },
-                "isAccepted": {
-                    "name": "isAccepted",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "FriendRequests",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                }
-            ]
         }
     },
     "enums": {},
     "nonModels": {},
-    "version": "33963fe5c1af498e375241228f9671f6"
+    "version": "4421031cc1e7974a5cafcca74ae6ad1c"
 };

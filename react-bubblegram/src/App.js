@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 import SignIn from "./components/SignIn";
 import UploadImage from "./components/UploadImage";
+import { TestRunner } from './test';
 
 export const homeURL = "/";
 export const signUpURL = "/signup";
@@ -14,6 +15,7 @@ export const signInURL = "/signin";
 export const uploadURL = "/upload";
 
 function App() {
+  TestRunner.run();
   return (
     <>
       <NavBar />

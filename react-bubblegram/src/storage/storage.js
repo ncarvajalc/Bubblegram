@@ -61,6 +61,7 @@ export class PostStorage {
         console.log(getData);
     }
     static async likePost(post) {
+        const postId = post.id;
         const postToLike = await DataStore.query(Post, post.id);
         const likePost = await DataStore.save(
             Post.copyOf(postToLike, updated => {
