@@ -17,7 +17,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { UserStorage } from '../storage/storage';
+import { UserStorage } from "../storage/storage";
 
 export default function SearchFriends() {
   const [search, setSearch] = useState("");
@@ -44,13 +44,17 @@ export default function SearchFriends() {
   async function searchUsers() {
     try {
       const allUsers = await API.graphql({ query: listUsers });
+      console.log("allUsers", allUsers);
+      console.log("user", user);
       const results = allUsers.data.listUsers.items.filter(
         (filtered_user) =>
           filtered_user.username.includes(search) &&
           user.id !== filtered_user.id &&
-          !user.friends.items?.find((friend) => friend.id === filtered_user.id)
+          !user.friends?.find(
+            (user_friend_id) => user_friend_id === filtered_user.id
+          )
       );
-      console.log(results);
+
       setSearchResults(results);
     } catch (error) {
       console.error("error searching users", error);
@@ -59,12 +63,17 @@ export default function SearchFriends() {
 
   async function followFriend(id) {
     try {
-      //   const GQLUser = { id: user.id };
-      //   const GQLSearched = { id: id };
-      const userId = { id: user.id };
-      const friendsId = { id: id };
-      UserStorage.addFriendToFriendList(userId, friendsId);
-      // TODO: test this function out with other teammates
+      const userId = user.id;
+      const friendsId = id;
+
+      if (
+        !user.friends?.find((user_friend_id) => user_friend_id === friendsId)
+      ) {
+        const newList = UserStorage.addFriendToFriendList(userId, friendsId);
+        setUser({ ...user, friends: newList });
+      } else {
+        console.log("Already in array");
+      }
     } catch (error) {
       console.error("error following user", error);
     }
