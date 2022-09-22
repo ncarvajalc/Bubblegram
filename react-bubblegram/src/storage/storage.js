@@ -1,10 +1,10 @@
-import { DataStore, Amplify, API } from 'aws-amplify';
-import awsconfig from '../aws-exports';
-import { Post, User } from '../models';
+import { DataStore, Amplify, API } from "aws-amplify";
+import awsconfig from "../aws-exports";
+import { Post, User } from "../models";
 
-import * as mutations from '../graphql/mutations';
-import * as queries from '../graphql/queries';
-import * as subscriptions from '../graphql/subscriptions';
+import * as mutations from "../graphql/mutations";
+import * as queries from "../graphql/queries";
+import * as subscriptions from "../graphql/subscriptions";
 
 Amplify.configure(awsconfig);
 
@@ -111,11 +111,22 @@ export class PostStorage {
             );
         }
     }
-    static async retrieveLikes(post) {
-        const postId = post.id;
-        const postModel = await DataStore.query(Post, postId);
-        const amountOfLikes = postModel.likes;
-        console.log(postModel);
-        return amountOfLikes;
+    async function updateLikesRealTime(postModel) {
+      const updateDetails = {
+        id: postModel.id,
+        likes: postModel.likes + 1,
+      };
+      const updatePostDetails = await API.graphql({
+        query: mutations.updatePost,
+        variables: { input: updateDetails },
+      });
     }
+  }
+  static async retrieveLikes(post) {
+    const postId = post.id;
+    const postModel = await DataStore.query(Post, postId);
+    const amountOfLikes = postModel.likes;
+    console.log(postModel);
+    return amountOfLikes;
+  }
 }

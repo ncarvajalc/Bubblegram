@@ -10,7 +10,7 @@ import Cropper from "react-easy-crop";
 
 Storage.configure({ level: "public" });
 
-export default function UploadImage() {
+export default function UploadImage({ setModal }) {
   const cropWidth = 320;
   const cropHeight = cropWidth;
   const [croppedImage, setCroppedImage] = useState(null);
@@ -94,6 +94,7 @@ export default function UploadImage() {
         variables: { input: postDetails },
       }).then(() => {
         setLoading(false);
+        setModal(false)
         setImageLoaded(false);
         setPreview(undefined);
         setSelectedFile(undefined);
@@ -133,10 +134,10 @@ export default function UploadImage() {
     try {
       cropImage(
         preview,
-        croppedArea?.width,
-        croppedArea?.height,
-        croppedArea?.x,
-        croppedArea?.y,
+        croppedArea?.width ?? preview.height,
+        croppedArea?.height ?? preview.height,
+        croppedArea?.x ?? 0,
+        croppedArea?.y ?? 0,
         (croppedImageTemp) => {
           setCroppedImage(croppedImageTemp);
         }
@@ -167,6 +168,7 @@ export default function UploadImage() {
               onCropChange={setCrop}
               onCropAreaChange={onCropComplete}
               onZoomChange={setZoom}
+              onMediaLoaded={onCropComplete}
             />
             <Box
               style={{
@@ -229,25 +231,3 @@ export default function UploadImage() {
     </Container>
   );
 }
-
-// <div className="bubble">
-// <div className="img-background">
-//   <img className="bubble-img" src={post.picture_url} />
-// </div>
-// <div className="card-content">
-//   <Typography variant="body2" color="text.secondary">
-//     {post.title}
-//   </Typography>
-//   <Typography variant="body2" color="text.secondary">
-//     {post.likes} likes
-//   </Typography>
-// </div>
-// <div className="card-actions">
-//   <Button size="small" onClick={handleLike}>
-//     Like
-//   </Button>
-//   <Button size="small" onClick={handlePop}>
-//     Pop
-//   </Button>
-// </div>
-// </div>
