@@ -53,20 +53,6 @@ export const getUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      friend_requests {
-        items {
-          id
-          isAccepted
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          userFriend_requestsId
-        }
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version
@@ -96,10 +82,6 @@ export const listUsers = /* GraphQL */ `
           startedAt
         }
         comments {
-          nextToken
-          startedAt
-        }
-        friend_requests {
           nextToken
           startedAt
         }
@@ -144,10 +126,6 @@ export const syncUsers = /* GraphQL */ `
           nextToken
           startedAt
         }
-        friend_requests {
-          nextToken
-          startedAt
-        }
         createdAt
         updatedAt
         _version
@@ -180,10 +158,6 @@ export const getPost = /* GraphQL */ `
           startedAt
         }
         comments {
-          nextToken
-          startedAt
-        }
-        friend_requests {
           nextToken
           startedAt
         }
@@ -350,10 +324,6 @@ export const getComment = /* GraphQL */ `
           nextToken
           startedAt
         }
-        friend_requests {
-          nextToken
-          startedAt
-        }
         createdAt
         updatedAt
         _version
@@ -463,168 +433,6 @@ export const syncComments = /* GraphQL */ `
         _lastChangedAt
         userCommentsId
         postCommentsId
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getFriendRequest = /* GraphQL */ `
-  query GetFriendRequest($id: ID!) {
-    getFriendRequest(id: $id) {
-      id
-      sender {
-        id
-        email
-        username
-        posts {
-          nextToken
-          startedAt
-        }
-        friends {
-          nextToken
-          startedAt
-        }
-        comments {
-          nextToken
-          startedAt
-        }
-        friend_requests {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        userFriendsId
-      }
-      receiver {
-        id
-        email
-        username
-        posts {
-          nextToken
-          startedAt
-        }
-        friends {
-          nextToken
-          startedAt
-        }
-        comments {
-          nextToken
-          startedAt
-        }
-        friend_requests {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        userFriendsId
-      }
-      isAccepted
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      userFriend_requestsId
-    }
-  }
-`;
-export const listFriendRequests = /* GraphQL */ `
-  query ListFriendRequests(
-    $filter: ModelFriendRequestFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listFriendRequests(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        sender {
-          id
-          email
-          username
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          userFriendsId
-        }
-        receiver {
-          id
-          email
-          username
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          userFriendsId
-        }
-        isAccepted
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        userFriend_requestsId
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncFriendRequests = /* GraphQL */ `
-  query SyncFriendRequests(
-    $filter: ModelFriendRequestFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncFriendRequests(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        sender {
-          id
-          email
-          username
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          userFriendsId
-        }
-        receiver {
-          id
-          email
-          username
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          userFriendsId
-        }
-        isAccepted
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        userFriend_requestsId
       }
       nextToken
       startedAt

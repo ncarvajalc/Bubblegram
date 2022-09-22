@@ -14,7 +14,8 @@ import { Tooltip } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
-import { feedURL, signInURL, uploadURL } from "../App";
+import SearchIcon from "@mui/icons-material/Search";
+import { feedURL, searchFriendsURL, signInURL, uploadURL } from "../App";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -182,6 +183,14 @@ const NavBar = () => {
                 </Button>
               </Box>
               <Box sx={{ flexGrow: 0 }}>
+                <IconButton
+                  onClick={() => navigate(searchFriendsURL)}
+                  size="large"
+                  aria-label="search"
+                  color="inherit"
+                >
+                  <SearchIcon />
+                </IconButton>
                 <Tooltip title="Open profile">
                   <IconButton
                     color="inherit"
