@@ -53,20 +53,6 @@ export const onCreateUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      friend_requests {
-        items {
-          id
-          isAccepted
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          userFriend_requestsId
-        }
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version
@@ -124,20 +110,6 @@ export const onUpdateUser = /* GraphQL */ `
           _lastChangedAt
           userCommentsId
           postCommentsId
-        }
-        nextToken
-        startedAt
-      }
-      friend_requests {
-        items {
-          id
-          isAccepted
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          userFriend_requestsId
         }
         nextToken
         startedAt
@@ -203,20 +175,6 @@ export const onDeleteUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      friend_requests {
-        items {
-          id
-          isAccepted
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          userFriend_requestsId
-        }
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version
@@ -246,10 +204,6 @@ export const onCreatePost = /* GraphQL */ `
           startedAt
         }
         comments {
-          nextToken
-          startedAt
-        }
-        friend_requests {
           nextToken
           startedAt
         }
@@ -307,10 +261,6 @@ export const onUpdatePost = /* GraphQL */ `
           nextToken
           startedAt
         }
-        friend_requests {
-          nextToken
-          startedAt
-        }
         createdAt
         updatedAt
         _version
@@ -362,10 +312,6 @@ export const onDeletePost = /* GraphQL */ `
           startedAt
         }
         comments {
-          nextToken
-          startedAt
-        }
-        friend_requests {
           nextToken
           startedAt
         }
@@ -448,10 +394,6 @@ export const onCreateComment = /* GraphQL */ `
           nextToken
           startedAt
         }
-        friend_requests {
-          nextToken
-          startedAt
-        }
         createdAt
         updatedAt
         _version
@@ -514,10 +456,6 @@ export const onUpdateComment = /* GraphQL */ `
           startedAt
         }
         comments {
-          nextToken
-          startedAt
-        }
-        friend_requests {
           nextToken
           startedAt
         }
@@ -586,10 +524,6 @@ export const onDeleteComment = /* GraphQL */ `
           nextToken
           startedAt
         }
-        friend_requests {
-          nextToken
-          startedAt
-        }
         createdAt
         updatedAt
         _version
@@ -604,210 +538,6 @@ export const onDeleteComment = /* GraphQL */ `
       _lastChangedAt
       userCommentsId
       postCommentsId
-    }
-  }
-`;
-export const onCreateFriendRequest = /* GraphQL */ `
-  subscription OnCreateFriendRequest {
-    onCreateFriendRequest {
-      id
-      sender {
-        id
-        email
-        username
-        posts {
-          nextToken
-          startedAt
-        }
-        friends {
-          nextToken
-          startedAt
-        }
-        comments {
-          nextToken
-          startedAt
-        }
-        friend_requests {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        userFriendsId
-      }
-      receiver {
-        id
-        email
-        username
-        posts {
-          nextToken
-          startedAt
-        }
-        friends {
-          nextToken
-          startedAt
-        }
-        comments {
-          nextToken
-          startedAt
-        }
-        friend_requests {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        userFriendsId
-      }
-      isAccepted
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      userFriend_requestsId
-    }
-  }
-`;
-export const onUpdateFriendRequest = /* GraphQL */ `
-  subscription OnUpdateFriendRequest {
-    onUpdateFriendRequest {
-      id
-      sender {
-        id
-        email
-        username
-        posts {
-          nextToken
-          startedAt
-        }
-        friends {
-          nextToken
-          startedAt
-        }
-        comments {
-          nextToken
-          startedAt
-        }
-        friend_requests {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        userFriendsId
-      }
-      receiver {
-        id
-        email
-        username
-        posts {
-          nextToken
-          startedAt
-        }
-        friends {
-          nextToken
-          startedAt
-        }
-        comments {
-          nextToken
-          startedAt
-        }
-        friend_requests {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        userFriendsId
-      }
-      isAccepted
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      userFriend_requestsId
-    }
-  }
-`;
-export const onDeleteFriendRequest = /* GraphQL */ `
-  subscription OnDeleteFriendRequest {
-    onDeleteFriendRequest {
-      id
-      sender {
-        id
-        email
-        username
-        posts {
-          nextToken
-          startedAt
-        }
-        friends {
-          nextToken
-          startedAt
-        }
-        comments {
-          nextToken
-          startedAt
-        }
-        friend_requests {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        userFriendsId
-      }
-      receiver {
-        id
-        email
-        username
-        posts {
-          nextToken
-          startedAt
-        }
-        friends {
-          nextToken
-          startedAt
-        }
-        comments {
-          nextToken
-          startedAt
-        }
-        friend_requests {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        userFriendsId
-      }
-      isAccepted
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      userFriend_requestsId
     }
   }
 `;
