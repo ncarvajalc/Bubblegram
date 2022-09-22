@@ -36,10 +36,10 @@ export class UserStorage {
     }
     const friendList = [...newFriendList, friendModel.id];
 
-    await updateFriendListOffline(userModel, friendList);
+    await updateChanges(userModel, friendList);
     return friendList;
-
-    async function updateFriendListOffline(userModel, newFriendList) {
+    /*=-=-=-=-=-=-= Helper Function =-=-=-=-=-=-=*/
+    async function updateChanges(userModel, newFriendList) {
       await DataStore.save(
         User.copyOf(userModel, (updated) => {
           updated.friends = newFriendList;
