@@ -8,6 +8,8 @@ import { LoadingButton } from "@mui/lab";
 
 import Cropper from "react-easy-crop";
 
+Storage.configure({ level: "public" });
+
 export default function UploadImage() {
   const cropWidth = 320;
   const cropHeight = cropWidth;
