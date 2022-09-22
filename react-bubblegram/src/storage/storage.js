@@ -27,8 +27,30 @@ export class UserStorage {
         const userModel = await DataStore.query(User, userToDelete.id);   
         DataStore.delete(userModel);
     }
-    static async addFriendToFriendList(user, friend) {
-
+    static async addFriendToFriendList(userId, friendId) {
+        const userModel = await DataStore.query(User, userId);
+        const friendModel = await DataStore.query(User, friendId);
+        let newFriendList = userModel.friends;
+        const hasFriends = typeof(newFriendList) === 'undefined';
+        if (!hasFriends) {
+            newFriendList = [];
+        }
+        newFriendList.push(friendModel);
+        const updatedFriendDetails = {
+            id: userId,
+            friends: newFriendList
+        }
+        await API.graphql(
+            { query: mutations.updateUser, variables: { input: updatedFriendDetails }
+        });
+        updateFriendListOffline(userModel, newFriendList);
+        async function updateFriendListOffline(user, newFriendList) {
+            await DataStore.save(
+                User.copyOf(userModel, updated => {
+                    updated.friends = newFriendList;
+                })
+            );
+        }
     }
 }
 export class PostStorage {
@@ -43,9 +65,9 @@ export class PostStorage {
         await DataStore.save(newPostModel);
         mapPostToUser(sender, newPostModel);
         async function mapPostToUser(sender, postModel) {
-            const hasNoPost = typeof(sender.posts) == 'undefined';
+            const hasPost = typeof(sender.posts) == 'undefined';
             let newPostHistory = sender.posts;
-            if (hasNoPost) {
+            if (!hasPost) {
                 newPostHistory = [];
             }
             newPostHistory.push(postModel);
@@ -64,8 +86,8 @@ export class PostStorage {
         const updatePostDetails = await API.graphql(
             { query: mutations.updatePost, variables: { input: updateDetails}}
         )
-        updateOffline(post);
-        async function updateOffline(post) {
+        updateLikesOffline(post);
+        async function updateLikesOffline(post) {
             const postModel = await DataStore.query(Post, post.id);
             const newLikes = postModel.likes + 1;
             const updatedPost = await DataStore.save(
