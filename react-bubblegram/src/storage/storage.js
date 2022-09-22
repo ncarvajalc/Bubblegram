@@ -28,8 +28,8 @@ export class UserStorage {
     static async addFriendToFriendList(userId, friendId) {
         const userModel = await DataStore.query(User, userId);
         const friendModel = await DataStore.query(User, friendId);
-        let newFriendList = userModel.friends;
 
+        let newFriendList = userModel.friends;
         // checks if the data exists
         const hasFriends = typeof(newFriendList) === 'undefined';
         if (!hasFriends) {
@@ -39,6 +39,7 @@ export class UserStorage {
         updateFriendListRealTime(userId, newFriendList);
         updateFriendListOffline(userModel, newFriendList);
 
+        /*=-=-=-=-=-=-= Helper functions =-=-=-=-=-=-=-=-=-=*/
         async function updateFriendListRealTime(userId, friendList) {
             const updatedFriendDetails = {
                 id: userId,
@@ -48,7 +49,7 @@ export class UserStorage {
                 { query: mutations.updateUser, variables: { input: updatedFriendDetails }
             });
         }
-        async function updateFriendListOffline(user, newFriendList) {
+        async function updateFriendListOffline(userModel, newFriendList) {
             await DataStore.save(
                 User.copyOf(userModel, updated => {
                     updated.friends = newFriendList;
@@ -56,9 +57,12 @@ export class UserStorage {
             );
         }
     }
+    static async close() {
+        DataStore.clear();
+    }
 }
 export class PostStorage {
-    static async storePost(sender, post) {
+    static async storePostToOwnerData(sender, post) {
         const newPost = {
             title: post.title,
             picture_url: post.picture_url,
@@ -66,8 +70,9 @@ export class PostStorage {
             owner: sender
         };
         const newPostModel = new Post(newPost);
-        await DataStore.save(newPostModel);
         mapPostToUser(sender, newPostModel);
+
+        /*=-=-=-=-=-=-= Helper functions =-=-=-=-=-=-=-=-=-=*/
         async function mapPostToUser(sender, postModel) {
             const hasPost = typeof(sender.posts) == 'undefined';
             let newPostHistory = sender.posts;
@@ -84,24 +89,26 @@ export class PostStorage {
     }
     static async likePost(post) {
         const postModel = await DataStore.query(Post, post.id);
-        updateLikesRealTime(postModel);
-        updateLikesOffline(postModel);
-        async function updateLikesOffline(postModel) {
-            const newLikes = postModel.likes + 1;
-            const updatedPost = await DataStore.save(
-                Post.copyOf(postModel, updated => {
-                    updated.likes = newLikes
-                })
-            );
-        }
-        async function updateLikesRealTime(postModel) {
+        const newLike = postModel.likes + 1;
+        updateLikesRealTime(postModel, newLike);
+        updateLikesOffline(postModel, newLike);
+
+        /*=-=-=-=-=-=-= Helper functions =-=-=-=-=-=-=-=-=-=*/
+        async function updateLikesRealTime(postModel, newLike) {
             const updateDetails = {
                 id: postModel.id,
-                likes: postModel.likes + 1
+                likes: newLike
             }
             const updatePostDetails = await API.graphql(
                 { query: mutations.updatePost, variables: { input: updateDetails}}
             )
+        }
+        async function updateLikesOffline(postModel, newLike) {
+            const updatedPost = await DataStore.save(
+                Post.copyOf(postModel, updated => {
+                    updated.likes = newLike
+                })
+            );
         }
     }
     static async retrieveLikes(post) {
