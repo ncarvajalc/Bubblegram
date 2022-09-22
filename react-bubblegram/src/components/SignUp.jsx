@@ -9,7 +9,7 @@ import Container from "@mui/material/Container";
 import { Button, Checkbox, FormControlLabel } from "@mui/material";
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { feedURL, signInURL } from "../App";
+import { feedURL, signInURL, homeURL } from "../App";
 import { Auth } from "aws-amplify";
 import { API, graphqlOperation } from "aws-amplify";
 import { createUser } from "../graphql/mutations";
@@ -100,7 +100,7 @@ export default function SignUp() {
           alignItems: "center",
         }}
       >
-        <img src="https://i.ibb.co/yy8mxQx/final-logo-primary.png" id="logo"/>
+        <img src="https://i.ibb.co/yy8mxQx/final-logo-primary.png" id="logo" onClick={() => navigate(homeURL)}/>
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <LockOutlinedIcon />
         </Avatar>

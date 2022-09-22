@@ -9,7 +9,7 @@ import Container from "@mui/material/Container";
 import { Button } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Auth } from "aws-amplify";
-import { feedURL, signUpURL } from "../App";
+import { feedURL, signUpURL, homeURL } from "../App";
 import "../styles/Login.css"
 
 function SignIn() {
@@ -47,7 +47,7 @@ function SignIn() {
           alignItems: "center",
         }}
       >
-        <img src="https://i.ibb.co/yy8mxQx/final-logo-primary.png" id="logo"/>
+        <img src="https://i.ibb.co/yy8mxQx/final-logo-primary.png" id="logo" onClick={() => navigate(homeURL)}/>
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <LockOutlinedIcon />
         </Avatar>
