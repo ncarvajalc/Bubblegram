@@ -192,7 +192,7 @@ const NavBar = () => {
                 <div className={modal ? 'modal-active' : 'modal'} id='modal'>
                   <UploadImage setModal={setModal}/>
                 </div>
-                <div id={modal ? 'overlay-active' : 'overlay'}> </div>
+                <div id={modal ? 'overlay-active' : 'overlay'} onClick={() => setModal(false)}> </div>
                 {/* MODAL ------------------------------------------------------------------ */}
                 <Button
                   onClick={() => {
