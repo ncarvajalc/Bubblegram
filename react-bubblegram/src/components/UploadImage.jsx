@@ -149,7 +149,7 @@ export default function UploadImage({ setModal }) {
 
   return (
     <Container maxWidth="xs" sx={{ my: 8 }}>
-      
+      <div className="modal-div">
         {selectedFile && (
           <Box
             className="img-background"
@@ -227,7 +227,7 @@ export default function UploadImage({ setModal }) {
             Upload
           </LoadingButton>
         </Box>
-      
+      </div>
     </Container>
   );
 }
