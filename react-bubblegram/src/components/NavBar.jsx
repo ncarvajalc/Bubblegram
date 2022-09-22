@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import SearchIcon from "@mui/icons-material/Search";
 import "../styles/Modal.css";
-import { feedURL, searchFriendsURL, signInURL } from "../App";
+import { feedURL, searchFriendsURL, signInURL, homeURL } from "../App";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -74,25 +74,7 @@ const NavBar = () => {
     <AppBar position="static" color="secondary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontWeight: 600,
-              color: "inherit",
-              textDecoration: "none",
-              "&:hover": {
-                color: "white",
-                textDecoration: "underline",
-              },
-            }}
-          >
-            Bubblegram
-          </Typography>
+          <img src="https://i.ibb.co/5xLwcyW/final-logo-white.png" id="nav-logo" onClick={() => navigate(homeURL)}/>
           {authenticated ? (
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
@@ -132,16 +114,9 @@ const NavBar = () => {
                   <Typography textAlign="center">My Bubbles</Typography>
                 </MenuItem>
                 {/* MODAL------------------------------------------------------------------ */}
-                <div className={modal ? "modal-active" : "modal"} id="modal">
-                  <div className="modal-header">
-                    <div className="title">Rename Playlist</div>
-                    <button
-                      onClick={() => setModal(false)}
-                      className="close-button"
-                    >
-                      x
-                    </button>
-                  </div>
+                <div className={modal ? 'modal-active' : 'modal'} id='modal'>
+                  <UploadImage setModal={setModal}/>
+
                 </div>
                 <div id={modal ? "overlay-active" : "overlay"}> </div>
                 {/* MODAL ------------------------------------------------------------------ */}
@@ -156,27 +131,6 @@ const NavBar = () => {
               </Menu>
             </Box>
           ) : null}
-
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontWeight: 600,
-              color: "inherit",
-              textDecoration: "none",
-              "&:hover": {
-                color: "white",
-                textDecoration: "underline",
-              },
-            }}
-          >
-            Bubblegram
-          </Typography>
           {authenticated ? (
             <>
               <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>

@@ -22,8 +22,8 @@ function App() {
       <div id="App">
         <Routes>
           <Route path={homeURL} element={<Home />} />
-          <Route path={signUpURL} element={<SignUp />} />
-          <Route path={signInURL} element={<SignIn />} />
+          <Route path={signUpURL} element={<div className="login-background//"><SignUp /></div>} />
+          <Route path={signInURL} element={<div className="login-background//"><SignIn /></div>} />
           <Route path={feedURL} element={<Feed />} />
           <Route path={uploadURL} element={<UploadImage />} />
           <Route path={searchFriendsURL} element={<SearchFriends />} />
