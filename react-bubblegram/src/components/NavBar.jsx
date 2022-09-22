@@ -16,8 +16,8 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import SearchIcon from "@mui/icons-material/Search";
-import "../styles/Modal.css"
-import { feedURL, searchFriendsURL, signInURL, uploadURL } from "../App";
+import "../styles/Modal.css";
+import { feedURL, searchFriendsURL, signInURL } from "../App";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [authenticated, setAuthenticated] = useState(false);
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState(false);
   const [username, setUsername] = useState("");
 
   const handleOpenNavMenu = (event) => {
@@ -132,17 +132,22 @@ const NavBar = () => {
                   <Typography textAlign="center">My Bubbles</Typography>
                 </MenuItem>
                 {/* MODAL------------------------------------------------------------------ */}
-                <div className={modal ? 'modal-active' : 'modal'} id='modal'>
-                    <div className='modal-header'>
-                        <div className='title'>Rename Playlist</div>
-                        <button onClick={() => setModal(false)}className='close-button'>x</button>
-                    </div>
-                    <div className='modal-body'>
-                        <input onChange={console.log("hey")} value={"hey"}></input>
-                        <button onClick={console.log("click")}>Save</button>
-                    </div>
+                <div className={modal ? "modal-active" : "modal"} id="modal">
+                  <div className="modal-header">
+                    <div className="title">Rename Playlist</div>
+                    <button
+                      onClick={() => setModal(false)}
+                      className="close-button"
+                    >
+                      x
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    <input onChange={console.log("hey")} value={"hey"}></input>
+                    <button onClick={console.log("click")}>Save</button>
+                  </div>
                 </div>
-                <div id={modal ? 'overlay-active' : 'overlay'}> </div>
+                <div id={modal ? "overlay-active" : "overlay"}> </div>
                 {/* MODAL ------------------------------------------------------------------ */}
                 <MenuItem
                   onClick={() => {
@@ -189,10 +194,15 @@ const NavBar = () => {
                   My Bubbles
                 </Button>
                 {/* MODAL------------------------------------------------------------------ */}
-                <div className={modal ? 'modal-active' : 'modal'} id='modal'>
-                  <UploadImage setModal={setModal}/>
+                <div className={modal ? "modal-active" : "modal"} id="modal">
+                  <UploadImage setModal={setModal} />
                 </div>
-                <div id={modal ? 'overlay-active' : 'overlay'} onClick={() => setModal(false)}> </div>
+                <div
+                  id={modal ? "overlay-active" : "overlay"}
+                  onClick={() => setModal(false)}
+                >
+                  {" "}
+                </div>
                 {/* MODAL ------------------------------------------------------------------ */}
                 <Button
                   onClick={() => {

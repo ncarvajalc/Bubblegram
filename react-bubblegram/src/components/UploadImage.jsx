@@ -94,10 +94,11 @@ export default function UploadImage({ setModal }) {
         variables: { input: postDetails },
       }).then(() => {
         setLoading(false);
-        setModal(false)
+        setModal(false);
         setImageLoaded(false);
         setPreview(undefined);
         setSelectedFile(undefined);
+        window.location.reload();
       });
     } catch (error) {
       console.error("Error uploading file: ", error);
@@ -149,85 +150,83 @@ export default function UploadImage({ setModal }) {
 
   return (
     <Container maxWidth="xs" sx={{ my: 8 }}>
-      
-        {selectedFile && (
-          <Box
-            className="img-background"
-            position="relative"
-            width={cropWidth}
-            height={cropHeight}
-            sx={{ m: 4 }}
-          >
-            <Cropper
-              image={preview}
-              crop={crop}
-              zoom={zoom}
-              aspect={aspect}
-              cropShape="round"
-              showGrid={false}
-              onCropChange={setCrop}
-              onCropAreaChange={onCropComplete}
-              onZoomChange={setZoom}
-              onMediaLoaded={onCropComplete}
-            />
-            <Box
-              style={{
-                position: "absolute",
-                bottom: 0,
-                left: "50%",
-                width: "50%",
-                transform: "translateX(-50%)",
-                height: "80px",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <Slider
-                value={zoom}
-                min={1}
-                max={3}
-                step={0.1}
-                aria-labelledby="Zoom"
-                onChange={(e, zoom) => setZoom(zoom)}
-              />
-            </Box>
-          </Box>
-        )}
-        <TextField
-          required
-          name="title"
-          label="Caption"
-          autoComplete="off"
-          variant="outlined"
-          onChange={handleChange}
-        />
-        <Button variant="contained" component="label" sx={{ my: 1 }}>
-          Choose picture
-          <input
-            type="file"
-            accept="image/png, image/gif, image/jpeg"
-            onChange={onChange}
-            required
-            hidden
+      {selectedFile && (
+        <Box
+          className="img-background"
+          position="relative"
+          width={cropWidth}
+          height={cropHeight}
+          sx={{ m: 4 }}
+        >
+          <Cropper
+            image={preview}
+            crop={crop}
+            zoom={zoom}
+            aspect={aspect}
+            cropShape="round"
+            showGrid={false}
+            onCropChange={setCrop}
+            onCropAreaChange={onCropComplete}
+            onZoomChange={setZoom}
+            onMediaLoaded={onCropComplete}
           />
-        </Button>
-
-        <Box>
-          <LoadingButton
-            sx={{ my: 1 }}
-            size="small"
-            color="secondary"
-            onClick={onSubmit}
-            loading={loading}
-            loadingPosition="start"
-            startIcon={<UploadIcon />}
-            variant="contained"
-            disabled={!imageLoaded}
+          <Box
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: "50%",
+              width: "50%",
+              transform: "translateX(-50%)",
+              height: "80px",
+              display: "flex",
+              alignItems: "center",
+            }}
           >
-            Upload
-          </LoadingButton>
+            <Slider
+              value={zoom}
+              min={1}
+              max={3}
+              step={0.1}
+              aria-labelledby="Zoom"
+              onChange={(e, zoom) => setZoom(zoom)}
+            />
+          </Box>
         </Box>
-      
+      )}
+      <TextField
+        required
+        name="title"
+        label="Caption"
+        autoComplete="off"
+        variant="outlined"
+        onChange={handleChange}
+      />
+      <Button variant="contained" component="label" sx={{ my: 1 }}>
+        Choose picture
+        <input
+          type="file"
+          accept="image/png, image/gif, image/jpeg"
+          onChange={onChange}
+          required
+          hidden
+        />
+      </Button>
+
+      <Box>
+        <LoadingButton
+          sx={{ my: 1 }}
+          size="small"
+          color="secondary"
+          onClick={onSubmit}
+          loading={loading}
+          loadingPosition="start"
+          startIcon={<UploadIcon />}
+          variant="contained"
+          disabled={!imageLoaded}
+        >
+          Upload
+        </LoadingButton>
+      </Box>
     </Container>
   );
 }
