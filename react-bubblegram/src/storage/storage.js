@@ -89,39 +89,14 @@ export class PostStorage {
     }
     static async likePost(post) {
         const postModel = await DataStore.query(Post, post.id);
+        console.log(postModel);
         const newLike = postModel.likes + 1;
-        updateLikesRealTime(postModel, newLike);
-        updateLikesOffline(postModel, newLike);
-
-        /*=-=-=-=-=-=-= Helper functions =-=-=-=-=-=-=-=-=-=*/
-        async function updateLikesRealTime(postModel, newLike) {
-            const updateDetails = {
-                id: postModel.id,
-                likes: newLike
-            }
-            const updatePostDetails = await API.graphql(
-                { query: mutations.updatePost, variables: { input: updateDetails}}
-            )
-        }
-        async function updateLikesOffline(postModel, newLike) {
-            const updatedPost = await DataStore.save(
-                Post.copyOf(postModel, updated => {
-                    updated.likes = newLike
-                })
-            );
-        }
+        const updatedPost = await DataStore.save(
+            Post.copyOf(postModel, updated => {
+                updated.likes = newLike
+            })
+        );
     }
-    async function updateLikesRealTime(postModel) {
-      const updateDetails = {
-        id: postModel.id,
-        likes: postModel.likes + 1,
-      };
-      const updatePostDetails = await API.graphql({
-        query: mutations.updatePost,
-        variables: { input: updateDetails },
-      });
-    }
-  }
   static async retrieveLikes(post) {
     const postId = post.id;
     const postModel = await DataStore.query(Post, postId);
