@@ -17,11 +17,10 @@ export declare class User {
   readonly email: string;
   readonly username: string;
   readonly posts?: (Post | null)[] | null;
-  readonly friends?: (User | null)[] | null;
+  readonly friends?: (string | null)[] | null;
   readonly comments?: (Comment | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly userFriendsId?: string | null;
   constructor(init: ModelInit<User, UserMetaData>);
   static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
 }

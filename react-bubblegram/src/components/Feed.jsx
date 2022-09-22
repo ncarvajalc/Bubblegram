@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
-import { API, Auth, graphqlOperation } from 'aws-amplify';
-import { listPosts, listUsers } from '../graphql/queries';
+import { API, Auth, graphqlOperation } from "aws-amplify";
+import { listPosts, listUsers } from "../graphql/queries";
 
-import "../styles/Feed.css"
-import Bubble from "./Bubble"
+import "../styles/Feed.css";
+import Bubble from "./Bubble";
 
 export default function Feed() {
-
-  const [posts, setPosts] = useState([])
-  const [authenticated, setAuthenticated] = useState(false)
+  const [posts, setPosts] = useState([]);
+  const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
     async function getCurrentUser() {
@@ -19,12 +18,10 @@ export default function Feed() {
           (user) => user.username === status.attributes.nickname
         );
         const allPosts = await API.graphql({ query: listPosts });
-        console.log(allPosts)
         const filteredPosts = allPosts.data.listPosts.items.filter(
           (posts) => posts.owner.id === currentUser.id
         );
         setPosts(filteredPosts);
-        console.log(filteredPosts)
       } catch (error) {
         console.error("error authenticating: ", error);
       }
@@ -32,16 +29,9 @@ export default function Feed() {
     getCurrentUser();
   }, []);
 
-  const userFeed = posts.map(post => {
-    return <Bubble 
-      key={post.id}
-      post={post}
-    />
-  })
+  const userFeed = posts.map((post) => {
+    return <Bubble key={post.id} post={post} />;
+  });
 
-  return (
-    <div className="user-feed">
-      {userFeed}
-    </div>
-  );
+  return <div className="user-feed">{userFeed}</div>;
 }

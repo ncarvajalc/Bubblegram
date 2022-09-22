@@ -41,16 +41,10 @@ export const schema = {
                 "friends": {
                     "name": "friends",
                     "isArray": true,
-                    "type": {
-                        "model": "User"
-                    },
+                    "type": "String",
                     "isRequired": false,
                     "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "userFriendsId"
-                    }
+                    "isArrayNullable": true
                 },
                 "comments": {
                     "name": "comments",
@@ -81,13 +75,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
-                },
-                "userFriendsId": {
-                    "name": "userFriendsId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 }
             },
             "syncable": true,
@@ -255,5 +242,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "4421031cc1e7974a5cafcca74ae6ad1c"
+    "version": "48a0f5d362a9803e6f743267df3feaa3"
 };
