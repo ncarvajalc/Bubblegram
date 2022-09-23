@@ -68,11 +68,15 @@ export default function SearchFriends() {
 
       console.log("userId", userId);
       console.log("friendsId", friendsId);
+      console.log("userFriends", user.friends);
 
-      if (user.friends &&
-        !user.friends.find((user_friend_id) => user_friend_id === friendsId)
+      if (
+        !user.friends?.find((user_friend_id) => user_friend_id === friendsId)
       ) {
-        const newList = UserStorage.addFriendToFriendList(userId, friendsId);
+        const newList = await UserStorage.addFriendToFriendList(
+          userId,
+          friendsId
+        );
         console.log(user);
         setUser({ ...user, friends: newList });
       } else {
