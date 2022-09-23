@@ -6,6 +6,7 @@ import bgimage from "../assets/bgimage.jpeg";
 import happyCustomer1 from "../assets/hc1.jpg";
 import happyCustomer2 from "../assets/hc2.jpg";
 import happyCustomer3 from "../assets/hc3.jpg";
+import FriendsFeed from "./FriendsFeed"
 import { useNavigate } from "react-router-dom";
 import { signUpURL } from "../App";
 
@@ -31,7 +32,7 @@ export default function Home() {
   }, []);
 
   if (authenticated) {
-    return <h1>{username}'s friends feed</h1>;
+    return <FriendsFeed />;
   } else {
     return (
       <Container
@@ -174,7 +175,7 @@ export default function Home() {
             </div>
             <Typography variant="body1">
               "I love the way I can share my pictures. Just open the app and
-              upload your buuble, you will be able to share it with your friends
+              upload your bubble, you will be able to share it with your friends
               in no time!"
             </Typography>
             <b>James Rayner</b>
