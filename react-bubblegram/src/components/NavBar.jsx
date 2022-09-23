@@ -86,16 +86,17 @@ const NavBar = () => {
                 color="inherit"
               >
                 <MenuIcon />
-                <div className={modal ? "modal-active" : "modal"} id="modal">
-                    <UploadImage setModal={setModal} />
-                  </div>
-                  <div
-                    id={modal ? "overlay-active" : "overlay"}
-                    onClick={() => setModal(false)}
-                  >
-                    {" "}
-                </div>
-              </IconButton>
+
+              </IconButton>                
+              <div className={modal ? "modal-active" : "modal"} id="modal">
+                <UploadImage setModal={setModal} />
+              </div>
+              <div
+                id={modal ? "overlay-active" : "overlay"}
+                onClick={() => setModal(false)}
+              >
+                {" "}
+              </div>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorElNav}
