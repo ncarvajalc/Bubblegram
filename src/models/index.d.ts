@@ -12,12 +12,16 @@ type CommentMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type FriendMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 export declare class User {
   readonly id: string;
   readonly email: string;
   readonly username: string;
   readonly posts?: (Post | null)[] | null;
-  readonly friends?: (string | null)[] | null;
+  readonly friends?: (Friend | null)[] | null;
   readonly comments?: (Comment | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -47,4 +51,13 @@ export declare class Comment {
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Comment, CommentMetaData>);
   static copyOf(source: Comment, mutator: (draft: MutableModel<Comment, CommentMetaData>) => MutableModel<Comment, CommentMetaData> | void): Comment;
+}
+
+export declare class Friend {
+  readonly id: string;
+  readonly friend?: User | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Friend, FriendMetaData>);
+  static copyOf(source: Friend, mutator: (draft: MutableModel<Friend, FriendMetaData>) => MutableModel<Friend, FriendMetaData> | void): Friend;
 }

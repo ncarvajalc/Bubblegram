@@ -26,21 +26,7 @@ export const createUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      friends {
-        items {
-          id
-          email
-          username
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          userFriendsId
-        }
-        nextToken
-        startedAt
-      }
+      friends
       comments {
         items {
           id
@@ -61,7 +47,6 @@ export const createUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      userFriendsId
     }
   }
 `;
@@ -90,21 +75,7 @@ export const updateUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      friends {
-        items {
-          id
-          email
-          username
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          userFriendsId
-        }
-        nextToken
-        startedAt
-      }
+      friends
       comments {
         items {
           id
@@ -125,7 +96,6 @@ export const updateUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      userFriendsId
     }
   }
 `;
@@ -154,21 +124,7 @@ export const deleteUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      friends {
-        items {
-          id
-          email
-          username
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          userFriendsId
-        }
-        nextToken
-        startedAt
-      }
+      friends
       comments {
         items {
           id
@@ -189,7 +145,6 @@ export const deleteUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      userFriendsId
     }
   }
 `;
@@ -211,10 +166,7 @@ export const createPost = /* GraphQL */ `
           nextToken
           startedAt
         }
-        friends {
-          nextToken
-          startedAt
-        }
+        friends
         comments {
           nextToken
           startedAt
@@ -224,7 +176,6 @@ export const createPost = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        userFriendsId
       }
       comments {
         items {
@@ -268,10 +219,7 @@ export const updatePost = /* GraphQL */ `
           nextToken
           startedAt
         }
-        friends {
-          nextToken
-          startedAt
-        }
+        friends
         comments {
           nextToken
           startedAt
@@ -281,7 +229,6 @@ export const updatePost = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        userFriendsId
       }
       comments {
         items {
@@ -325,10 +272,7 @@ export const deletePost = /* GraphQL */ `
           nextToken
           startedAt
         }
-        friends {
-          nextToken
-          startedAt
-        }
+        friends
         comments {
           nextToken
           startedAt
@@ -338,7 +282,6 @@ export const deletePost = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        userFriendsId
       }
       comments {
         items {
@@ -380,12 +323,12 @@ export const createComment = /* GraphQL */ `
           id
           email
           username
+          friends
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          userFriendsId
         }
         comments {
           nextToken
@@ -407,10 +350,7 @@ export const createComment = /* GraphQL */ `
           nextToken
           startedAt
         }
-        friends {
-          nextToken
-          startedAt
-        }
+        friends
         comments {
           nextToken
           startedAt
@@ -420,7 +360,6 @@ export const createComment = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        userFriendsId
       }
       createdAt
       updatedAt
@@ -448,12 +387,12 @@ export const updateComment = /* GraphQL */ `
           id
           email
           username
+          friends
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          userFriendsId
         }
         comments {
           nextToken
@@ -475,10 +414,7 @@ export const updateComment = /* GraphQL */ `
           nextToken
           startedAt
         }
-        friends {
-          nextToken
-          startedAt
-        }
+        friends
         comments {
           nextToken
           startedAt
@@ -488,7 +424,6 @@ export const updateComment = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        userFriendsId
       }
       createdAt
       updatedAt
@@ -516,12 +451,12 @@ export const deleteComment = /* GraphQL */ `
           id
           email
           username
+          friends
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          userFriendsId
         }
         comments {
           nextToken
@@ -543,10 +478,7 @@ export const deleteComment = /* GraphQL */ `
           nextToken
           startedAt
         }
-        friends {
-          nextToken
-          startedAt
-        }
+        friends
         comments {
           nextToken
           startedAt
@@ -556,7 +488,6 @@ export const deleteComment = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        userFriendsId
       }
       createdAt
       updatedAt

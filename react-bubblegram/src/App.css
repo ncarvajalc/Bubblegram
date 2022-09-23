@@ -8,3 +8,9 @@
   overscroll-behavior: none;
   transition: all .5s;
 }
+
+.login-background {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("https://img.freepik.com/premium-photo/abstract-pink-bubbles-white-background_127755-1045.jpg?w=2000")
+}

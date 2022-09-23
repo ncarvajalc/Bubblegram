@@ -41,10 +41,16 @@ export const schema = {
                 "friends": {
                     "name": "friends",
                     "isArray": true,
-                    "type": "String",
+                    "type": {
+                        "model": "Friend"
+                    },
                     "isRequired": false,
                     "attributes": [],
-                    "isArrayNullable": true
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "userFriendsId"
+                    }
                 },
                 "comments": {
                     "name": "comments",
@@ -238,9 +244,58 @@ export const schema = {
                     "properties": {}
                 }
             ]
+        },
+        "Friend": {
+            "name": "Friend",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "friend": {
+                    "name": "friend",
+                    "isArray": false,
+                    "type": {
+                        "model": "User"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "userFriendsId"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Friends",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                }
+            ]
         }
     },
     "enums": {},
     "nonModels": {},
-    "version": "48a0f5d362a9803e6f743267df3feaa3"
+    "version": "43edff462dab9f858e9187f4b8afa882"
 };

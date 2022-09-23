@@ -1,11 +1,12 @@
+import React from 'react'
+
 import { useState, useEffect } from "react";
 import { API, Auth, graphqlOperation } from "aws-amplify";
 import { listPosts, listUsers } from "../graphql/queries";
-
 import "../styles/Feed.css";
-import Bubble from "./Bubble";
+import FriendBubble from "./FriendBubble";
 
-export default function Feed() {
+export default function FriendsFeed() {
   const [posts, setPosts] = useState([]);
   const [authenticated, setAuthenticated] = useState(false);
 
@@ -19,7 +20,9 @@ export default function Feed() {
         );
         const allPosts = await API.graphql({ query: listPosts });
         const filteredPosts = allPosts.data.listPosts.items.filter(
-          (posts) => posts.owner.id === currentUser.id
+          (posts) => {
+            return currentUser.friends?.includes(posts.owner.id)
+          }
         );
         setPosts(filteredPosts);
       } catch (error) {
@@ -30,7 +33,7 @@ export default function Feed() {
   }, []);
 
   const userFeed = posts.map((post) => {
-    return <Bubble key={post.id} post={post} />;
+    return <FriendBubble key={post.id} post={post} owner={post.owner.username}/>;
   });
 
   return <div className="user-feed">{userFeed}</div>;
