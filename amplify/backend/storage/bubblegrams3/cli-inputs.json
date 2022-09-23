@@ -1,6 +1,6 @@
 {
   "resourceName": "bubblegrams3",
-  "policyUUID": "f90ffa14",
+  "policyUUID": "c24b15d1",
   "bucketName": "bubblegrams3",
   "storageAccess": "authAndGuest",
   "guestAccess": [
@@ -11,5 +11,6 @@
     "READ",
     "DELETE"
   ],
+  "triggerFunction": "NONE",
   "groupAccess": {}
 }

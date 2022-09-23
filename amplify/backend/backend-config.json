@@ -18,7 +18,7 @@
     }
   },
   "auth": {
-    "bubblegramfcdedd4b": {
+    "bubblegramf087f270": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
