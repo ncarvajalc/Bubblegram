@@ -203,17 +203,18 @@ export default function UploadImage({ setModal }) {
         variant="outlined"
         onChange={handleChange}
       />
-      <Button variant="contained" component="label" sx={{ my: 1 }}>
-        Choose picture
-        <input
-          type="file"
-          accept="image/png, image/gif, image/jpeg"
-          onChange={onChange}
-          required
-          hidden
-        />
-      </Button>
-
+      <Box>
+        <Button variant="contained" component="label" sx={{ my: 1 }}>
+          Choose picture
+          <input
+            type="file"
+            accept="image/png, image/gif, image/jpeg"
+            onChange={onChange}
+            required
+            hidden
+          />
+        </Button>
+      </Box>
       <Box>
         <LoadingButton
           sx={{ my: 1 }}
