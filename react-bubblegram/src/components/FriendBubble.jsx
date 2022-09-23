@@ -101,7 +101,7 @@ function FriendBubble({ post, owner }) {
           {post.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {likes} likes
+          {likes} ❤️
         </Typography>
       </div>
       <div className="card-actions">
