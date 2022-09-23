@@ -125,7 +125,6 @@ const NavBar = () => {
                 {/* MODAL------------------------------------------------------------------ */}
                 <div className={modal ? 'modal-active' : 'modal'} id='modal'>
                   <UploadImage setModal={setModal}/>
-
                 </div>
                 <div id={modal ? "overlay-active" : "overlay"}> </div>
                 {/* MODAL ------------------------------------------------------------------ */}
