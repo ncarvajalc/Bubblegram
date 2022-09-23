@@ -74,7 +74,12 @@ const NavBar = () => {
     <AppBar position="static" color="secondary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img src="https://i.ibb.co/5xLwcyW/final-logo-white.png" id="nav-logo" onClick={() => navigate(homeURL)}/>
+          <img
+            alt="logo"
+            src="https://i.ibb.co/5xLwcyW/final-logo-white.png"
+            id="nav-logo"
+            onClick={() => navigate(homeURL)}
+          />
           {authenticated ? (
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
@@ -86,8 +91,7 @@ const NavBar = () => {
                 color="inherit"
               >
                 <MenuIcon />
-
-              </IconButton>                
+              </IconButton>
               <div className={modal ? "modal-active" : "modal"} id="modal">
                 <UploadImage setModal={setModal} />
               </div>
@@ -124,8 +128,8 @@ const NavBar = () => {
                   <Typography textAlign="center">My Bubbles</Typography>
                 </MenuItem>
                 {/* MODAL------------------------------------------------------------------ */}
-                <div className={modal ? 'modal-active' : 'modal'} id='modal'>
-                  <UploadImage setModal={setModal}/>
+                <div className={modal ? "modal-active" : "modal"} id="modal">
+                  <UploadImage setModal={setModal} />
                 </div>
                 <div id={modal ? "overlay-active" : "overlay"}> </div>
                 {/* MODAL ------------------------------------------------------------------ */}
