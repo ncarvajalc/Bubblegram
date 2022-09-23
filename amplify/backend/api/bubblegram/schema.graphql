@@ -8,13 +8,8 @@ type User @model {
   email: String!
   username: String!
   posts: [Post] @hasMany
-  friends: [Friend] @hasMany
+  friends: [String]
   comments: [Comment] @hasMany
-}
-
-type Friend @model {
-  user: User
-  friend: User @belongsTo
 }
 
 type Post @model {

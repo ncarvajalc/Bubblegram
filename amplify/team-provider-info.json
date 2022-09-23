@@ -16,5 +16,25 @@
         "bubblegramfcdedd4b": {}
       }
     }
+  },
+  "ready": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-bubblegram-ready-232457-authRole",
+      "UnauthRoleArn": "arn:aws:iam::463439488459:role/amplify-bubblegram-ready-232457-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::463439488459:role/amplify-bubblegram-ready-232457-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-bubblegram-ready-232457-deployment",
+      "UnauthRoleName": "amplify-bubblegram-ready-232457-unauthRole",
+      "StackName": "amplify-bubblegram-ready-232457",
+      "StackId": "arn:aws:cloudformation:us-east-1:463439488459:stack/amplify-bubblegram-ready-232457/afea62a0-3af7-11ed-9c64-0e900deede47",
+      "AmplifyAppId": "d32x3nnp3h4yj1"
+    },
+    "categories": {
+      "auth": {
+        "bubblegramfcdedd4b": {},
+        "bubblegramf087f270": {},
+        "true": {}
+      }
+    }
   }
 }
