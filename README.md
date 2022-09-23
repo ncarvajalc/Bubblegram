@@ -45,7 +45,11 @@ Clone the repo to your local drive
 git clone https://github.com/ncarvajalc/Bubblegram.git
 ```
 
-Enter the repo and install all the packages  
+Enter the react project
+```bash
+cd Bubblegram/react-bubblegram
+```
+Install all the packages  
 ```bash
 npm install
 ```
