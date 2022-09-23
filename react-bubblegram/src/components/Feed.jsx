@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import { API, Auth, graphqlOperation } from "aws-amplify";
+import { API, Auth } from "aws-amplify";
 import { listPosts, listUsers } from "../graphql/queries";
 
 import "../styles/Feed.css";
 import Bubble from "./Bubble";
+import { Typography } from "@mui/material";
 
 export default function Feed() {
   const [posts, setPosts] = useState([]);
-  const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
     async function getCurrentUser() {
@@ -33,5 +33,12 @@ export default function Feed() {
     return <Bubble key={post.id} post={post} />;
   });
 
-  return <div className="user-feed">{userFeed}</div>;
+  return (
+    <>
+      <Typography sx={{ m: 4 }} variant="h2">
+        My bubbles
+      </Typography>
+      <div className="user-feed">{userFeed}</div>
+    </>
+  );
 }

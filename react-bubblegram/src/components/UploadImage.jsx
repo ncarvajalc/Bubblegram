@@ -82,7 +82,6 @@ export default function UploadImage({ setModal }) {
         }
       );
 
-      console.log(user);
       const postDetails = {
         title: inputs.title,
         picture_url: object.key,
@@ -101,7 +100,7 @@ export default function UploadImage({ setModal }) {
         window.location.reload();
       });
     } catch (error) {
-      console.error("Error uploading file: ", error);
+      console.error("Error uploading file: ", error, imageLoaded);
     }
   }
   function cropImage(url, width, height, x, y, callback) {
