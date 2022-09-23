@@ -6,6 +6,7 @@ import bgimage from "../assets/bgimage.jpeg";
 import happyCustomer1 from "../assets/hc1.jpg";
 import happyCustomer2 from "../assets/hc2.jpg";
 import happyCustomer3 from "../assets/hc3.jpg";
+import FriendsFeed from "./FriendsFeed"
 import { useNavigate } from "react-router-dom";
 import { signUpURL } from "../App";
 
@@ -31,7 +32,7 @@ export default function Home() {
   }, []);
 
   if (authenticated) {
-    return <h1>{username}'s friends feed</h1>;
+    return <FriendsFeed />;
   } else {
     return (
       <Container
