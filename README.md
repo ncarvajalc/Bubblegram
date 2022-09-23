@@ -8,6 +8,7 @@
 5. [Accomplishment](#accomplishments-that-were-proud-of)
 6. [What we learn](#what-we-learned)
 7. [Next Steps](#whats-next-for-bubblegram)
+8. [Running the application](#running-the-application)
 
 ## Inspiration
 
@@ -36,3 +37,20 @@ Reading up on documentation and helping other was the key to building this appli
 ## What's next for Bubblegram
 
 - Bubbles that stream live data as well as video recordings
+
+## Running the application
+
+Clone the repo to your local drive  
+```bash
+git clone https://github.com/ncarvajalc/Bubblegram.git
+```
+
+Enter the repo and install all the packages  
+```bash
+npm install
+```
+
+Deploy the app  
+```bash
+npm start
+```
