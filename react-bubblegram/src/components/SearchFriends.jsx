@@ -30,7 +30,7 @@ export default function SearchFriends() {
       try {
         let status = await Auth.currentAuthenticatedUser();
         const allUsers = await API.graphql({ query: listUsers });
-        const currentUser = allUsers.data.listUsers.items.find(
+        const currentUser = await allUsers.data.listUsers.items.find(
           (user) => user.username === status.attributes.nickname
         );
         setUser(currentUser);
@@ -44,8 +44,6 @@ export default function SearchFriends() {
   async function searchUsers() {
     try {
       const allUsers = await API.graphql({ query: listUsers });
-      console.log("allUsers", allUsers);
-      console.log("user", user);
       const results = allUsers.data.listUsers.items.filter(
         (filtered_user) =>
           filtered_user.username.includes(search) &&
@@ -65,22 +63,19 @@ export default function SearchFriends() {
     try {
       const userId = user.id;
       const friendsId = id;
+      let userFriends = [];
+      if (user.friends) {
+        userFriends = user.friends;
+      }
 
-      console.log("userId", userId);
-      console.log("friendsId", friendsId);
-      console.log("userFriends", user.friends);
-
-      if (
-        !user.friends?.find((user_friend_id) => user_friend_id === friendsId)
-      ) {
+      if (!userFriends.find((user_friend_id) => user_friend_id === friendsId)) {
         const newList = await UserStorage.addFriendToFriendList(
           userId,
           friendsId
         );
-        console.log(user);
         setUser({ ...user, friends: newList });
       } else {
-        console.log("Already in array");
+        alert("You are already following this user");
       }
     } catch (error) {
       console.error("error following user", error);

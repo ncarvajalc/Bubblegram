@@ -11,7 +11,6 @@ import {
   ListItem,
   Modal,
   Paper,
-  TextareaAutosize,
   TextField,
 } from "@mui/material";
 import { createComment } from "../graphql/mutations";
@@ -41,7 +40,6 @@ function Bubble({ post }) {
           await allComments.data.listComments.items.filter(
             (comment) => comment.post.id === post.id
           );
-        console.log("currentUser", filteredComments);
         setComments(filteredComments);
       } catch (error) {
         console.error("error authenticating: ", error);
@@ -62,7 +60,7 @@ function Bubble({ post }) {
 
   async function handlePostComment(e) {
     e.preventDefault();
-    const newCommentObject = await API.graphql({
+    await API.graphql({
       query: createComment,
       variables: {
         input: {
@@ -72,8 +70,6 @@ function Bubble({ post }) {
         },
       },
     });
-    console.log(newCommentObject);
-    console.log(comments);
 
     setNewComment("");
   }

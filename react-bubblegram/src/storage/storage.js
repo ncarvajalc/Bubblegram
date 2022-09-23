@@ -1,13 +1,8 @@
-import { DataStore, Amplify, API } from "aws-amplify";
+import { DataStore, Amplify } from "aws-amplify";
 import awsconfig from "../aws-exports";
 import { Post, User } from "../models";
 
-import * as mutations from "../graphql/mutations";
-import * as queries from "../graphql/queries";
-import * as subscriptions from "../graphql/subscriptions";
-
 Amplify.configure(awsconfig);
-
 export class UserStorage {
   static async createUserData(newUser) {
     const userInformation = {
@@ -79,9 +74,8 @@ export class PostStorage {
   }
   static async likePost(post) {
     const postModel = await DataStore.query(Post, post.id);
-    console.log(postModel);
     const newLike = postModel.likes + 1;
-    const updatedPost = await DataStore.save(
+    await DataStore.save(
       Post.copyOf(postModel, (updated) => {
         updated.likes = newLike;
       })
@@ -91,7 +85,6 @@ export class PostStorage {
     const postId = post.id;
     const postModel = await DataStore.query(Post, postId);
     const amountOfLikes = postModel.likes;
-    console.log(postModel);
     return amountOfLikes;
   }
 }

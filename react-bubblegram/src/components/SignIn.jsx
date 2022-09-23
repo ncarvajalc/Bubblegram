@@ -9,8 +9,8 @@ import Container from "@mui/material/Container";
 import { Button } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Auth } from "aws-amplify";
-import { feedURL, signUpURL, homeURL } from "../App";
-import "../styles/Login.css"
+import { signUpURL, homeURL } from "../App";
+import "../styles/Login.css";
 
 function SignIn() {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ function SignIn() {
     try {
       await Auth.signIn(username, password);
       setError(null);
-      navigate(feedURL);
+      navigate(homeURL);
       window.location.reload();
     } catch (error) {
       console.error(error.message);
@@ -47,7 +47,12 @@ function SignIn() {
           alignItems: "center",
         }}
       >
-        <img src="https://i.ibb.co/yy8mxQx/final-logo-primary.png" id="logo" onClick={() => navigate(homeURL)}/>
+        <img
+          src="https://i.ibb.co/yy8mxQx/final-logo-primary.png"
+          id="logo"
+          alt="logo"
+          onClick={() => navigate(homeURL)}
+        />
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <LockOutlinedIcon />
         </Avatar>
